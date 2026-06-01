@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Álbum Copa 2026 — Controle de Figurinhas</title>
+<style>
+:root{--bg:#070710;--bg2:#0a0f1a;--bg3:#0d1a30;--border:#1e293b;--border2:#0f1729;--text:#e2e8f0;--text2:#94a3b8;--text3:#475569;--gold:#c9a227;--gold2:#f5e07a;--blue:#3b82f6;--blue2:#60a5fa;--green:#22c55e;--red:#f87171;--red2:#e5383b;--radius:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;font-size:14px}
+button{cursor:pointer;font-family:inherit}
+input,textarea{font-family:inherit}
+header{background:linear-gradient(135deg,#0a0a1f,#0f1a3a,#0a0a1f);border-bottom:1px solid #0f1f3a;padding:16px}
+.hi{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.badge{font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;font-weight:700}
+h1.ttl{font-size:18px;font-weight:800;color:#f1f5f9}
+.sub{font-size:11px;color:var(--text3);margin-top:2px}
+.tbox{text-align:right}
+.tnum{font-size:26px;font-weight:900;color:var(--blue2)}
+.tof{font-size:13px;color:#1e3a5f}
+.tlbl{font-size:10px;color:var(--text3)}
+.bbar{width:160px;height:6px;background:#0f1a2e;border-radius:3px;overflow:hidden;margin-top:4px;margin-left:auto}
+.bbar-f{height:100%;background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:3px;transition:width .5s}
+.tpct{font-size:10px;color:var(--blue);margin-top:2px}
+.save-pill{font-size:9px;color:#60a5fa;opacity:0;transition:opacity .4s;margin-top:4px;letter-spacing:.5px}
+nav{display:flex;gap:3px;padding:8px 14px;background:#07070f;border-bottom:1px solid #0f1729;flex-wrap:wrap;position:sticky;top:0;z-index:100}
+.tab{padding:7px 13px;border-radius:7px;border:1px solid #0f1729;background:transparent;color:var(--text3);font-size:12px;font-weight:500}
+.tab.on{background:#0f1f3a;color:var(--blue2);border-color:#1d4ed8}
+main{max-width:960px;margin:0 auto;padding:16px 13px}
+.sec{display:none}.sec.on{display:block}
+.cr{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.card{background:var(--bg2);border:1px solid var(--border2);border-radius:11px;padding:12px;text-align:center}
+.cv{font-size:22px;font-weight:800}.cl{font-size:10px;color:var(--text3);margin-top:2px}.cs{font-size:11px;font-weight:600;margin-top:2px}
+.tc{background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid #1a3a5a;border-radius:13px;padding:14px 18px;margin-bottom:18px}
+.ti{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.tbig{font-size:30px;font-weight:900;color:var(--blue2);line-height:1}
+.bar{height:9px;background:#0a1628;border-radius:4px;overflow:hidden;border:1px solid #1a3a5a;flex:1}
+.barf{height:100%;background:linear-gradient(90deg,#1d4ed8,#7c3aed,var(--gold));border-radius:4px;transition:width .6s}
+.aot{font-size:10px;font-weight:800;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.blk{margin-bottom:14px}
+.bh{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.btag{font-size:8px;font-weight:800;letter-spacing:1px;padding:2px 7px;border-radius:4px;text-transform:uppercase;white-space:nowrap}
+.bttl{flex:1;font-size:11px;font-weight:600;color:var(--text3)}
+.bcnt{font-size:12px;font-weight:800}
+.pr{display:flex;flex-wrap:wrap;gap:5px}
+.pill{font-size:9px;padding:3px 7px;border-radius:5px;background:var(--bg2);border:1px solid var(--border);color:#334155}
+.pill.on{background:#0f2010;border-color:#22c55e55;color:#4ade80}
+.pill.gon{background:#1a1200;border-color:var(--gold);color:var(--gold)}
+.gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:14px}
+.gc{background:var(--bg2);border:1px solid;border-radius:11px;padding:11px}
+.gbdg{display:inline-block;font-size:9px;font-weight:800;letter-spacing:1px;padding:2px 7px;border-radius:5px;text-transform:uppercase}
+.nr{display:flex;align-items:center;gap:5px;margin-bottom:5px}
+.nb{height:3px;background:#0f1729;border-radius:2px;overflow:hidden;margin-top:2px;flex:1}
+.nbf{height:100%;border-radius:2px;transition:width .3s}
+.gbw{height:3px;background:#0f1729;border-radius:2px;overflow:hidden;margin-top:8px}
+.gbf{height:100%;border-radius:2px}
+.ab{display:flex;gap:10px;align-items:center;background:var(--bg2);border:1px solid #1d4ed8;border-radius:9px;padding:9px 13px;color:#93c5fd;font-size:12px;margin-top:8px}
+.fwcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:9px;margin-bottom:8px}
+.fc{position:relative;background:linear-gradient(145deg,#0d1e3a,#0a1628);border:1px solid #1a3a6a44;border-radius:11px;padding:22px 10px 10px;text-align:center;cursor:pointer;transition:all .2s}
+.fc.on{background:linear-gradient(145deg,#0f2010,#0a180a);border-color:var(--gold);box-shadow:0 0 12px #c9a22720}
+.fn{position:absolute;top:6px;left:6px;font-size:9px;font-weight:800;color:#5a7ab0}
+.ff{position:absolute;top:6px;right:6px;font-size:9px;color:var(--gold)}
+.fi{font-size:22px;margin-bottom:4px}
+.fnam{font-size:10px;font-weight:700;color:#94a3b8;line-height:1.3}
+.fc.on .fnam{color:#e8d48b}
+.fsub{font-size:9px;color:#3d5a7a;margin:3px 0 6px}
+.rr{display:flex;align-items:center;justify-content:center;gap:3px;margin-top:4px}
+.rb{background:#0a1628;border:1px solid #1a3a5a;color:#3d5a7a;border-radius:3px;width:16px;height:16px;font-size:10px;line-height:1;padding:0}
+.rl{font-size:9px;min-width:22px;text-align:center;color:#334155}
+.rl.h{color:var(--gold)}
+.tb{border:1px solid #1a3a5a;background:transparent;color:#3d5a7a;border-radius:7px;padding:4px 10px;font-size:10px;font-weight:600;width:100%;margin-bottom:4px}
+.tb.on{background:linear-gradient(135deg,var(--gold),#8b6914);color:#000;border-color:var(--gold);box-shadow:0 2px 7px #c9a22744}
+.si{width:100%;background:var(--bg2);border:1px solid var(--border2);border-radius:9px;padding:8px 13px;color:var(--text);font-size:12px;margin-bottom:14px;outline:none}
+.gtt{display:flex;align-items:center;gap:10px;padding-bottom:8px;margin-bottom:10px;border-bottom:1px solid}
+.ng{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:9px}
+.nc{background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:11px;cursor:pointer;text-align:center}
+.na{font-size:10px;font-weight:800;color:var(--gold);letter-spacing:1px;margin-bottom:1px}
+.nn{font-size:10px;color:#cbd5e1;font-weight:500;margin-bottom:2px}
+.ngrp{font-size:9px;font-weight:600;margin-bottom:5px}
+.nbar{height:3px;background:#0f1729;border-radius:2px;overflow:hidden;margin-bottom:5px}
+.nbarf{height:100%;border-radius:2px;transition:width .3s}
+.nm{display:flex;justify-content:center;gap:8px;font-size:11px}
+.bk{background:#0f1729;border:none;color:#64748b;padding:6px 13px;border-radius:7px;font-size:12px;margin-bottom:13px}
+.nvb{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.nvbt{background:#0f1729;border:1px solid var(--border);color:#94a3b8;padding:6px 12px;border-radius:7px;font-size:12px;display:flex;align-items:center;gap:4px}
+.nvbt:disabled{opacity:.3;cursor:default}
+.nh{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;background:var(--bg2);padding:13px;border-radius:11px;border:1px solid}
+.mb{width:200px;height:5px;background:#0f1729;border-radius:3px;overflow:hidden;margin-top:4px}
+.mbf{height:100%;border-radius:3px;transition:width .3s}
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:6px;margin-bottom:16px}
+.sc{border-radius:9px;padding:7px 5px;text-align:center;border:2px solid var(--border);background:#0a0a18}
+.sc.on{background:#0f1a10}.sc.sh{background:#0d200a}.sc.ph{background:#0a1220}
+.sp{font-size:9px;color:var(--text3);margin-bottom:2px}
+.sbt{background:none;border:none;font-size:13px;display:block;width:100%;color:#334155;padding:0}
+.slbl{font-size:8px;color:#334155;margin-bottom:3px}
+.mbox{background:var(--bg2);border:1px solid #1d4ed822;border-radius:9px;padding:10px 13px;font-size:11px;line-height:1.9;margin-bottom:8px}
+.hb{position:relative;overflow:hidden;background:linear-gradient(160deg,#0a1628,#0d2250,#0a1628);border:1px solid #1a3a6a;border-radius:14px;padding:22px 18px 16px;margin-bottom:20px;text-align:center}
+.hg{position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:280px;height:100px;border-radius:50%;background:radial-gradient(ellipse,#c9a22744,transparent 70%);pointer-events:none}
+.hst{font-size:9px;color:#c9a22766;letter-spacing:3px;margin-bottom:6px}
+.httl{font-size:18px;font-weight:900;letter-spacing:3px;text-transform:uppercase;background:linear-gradient(180deg,#f5e07a,var(--gold),#8b6914);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:3px}
+.hsub{font-size:11px;color:#5a7ab0;letter-spacing:1px;margin-bottom:12px}
+.hpr{display:flex;align-items:center;gap:8px;justify-content:center}
+.hpb{width:180px;height:5px;background:#0a1628;border-radius:3px;overflow:hidden;border:1px solid #1a3a6a}
+.hpbf{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;transition:width .5s}
+.hpl{font-size:11px;color:var(--gold);font-weight:700}
+.ch{display:flex;align-items:center;gap:10px;margin:0 0 13px}
+.cl2{flex:1;height:1px;background:linear-gradient(90deg,transparent,#c9a22755,transparent)}
+.clbl{font-size:8px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+.ic{position:relative;overflow:hidden;background:linear-gradient(155deg,#0d1e3a,#0a1628);border:1px solid #1a3a6a44;border-radius:13px;padding:22px 12px 12px;text-align:center;max-width:180px;margin:0 auto 24px}
+.ic.on{background:linear-gradient(155deg,#0f2010,#0a180a);border-color:var(--gold);box-shadow:0 0 16px #c9a22722}
+.ic00{border-color:#f59e0b33;background:#100e00}.ic00.on{background:#1a1200;border-color:#f59e0b99}
+.ii{font-size:28px;margin-bottom:7px}.in{font-size:11px;font-weight:700;color:#e8d48b;margin-bottom:2px}.isub{font-size:9px;color:#3d5a7a;margin-bottom:9px}
+.b00{position:absolute;top:6px;right:6px;font-size:10px;font-weight:900;color:#f59e0b;background:#f59e0b22;padding:1px 5px;border-radius:4px}
+.hdr{display:flex;align-items:center;gap:9px;padding:7px 12px;border-radius:9px;border:1px solid;margin-bottom:9px}
+.hdrnm{flex:1;font-size:11px;font-weight:800;letter-spacing:2px;color:#e8d48b}
+.stg{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:9px;margin-bottom:4px}
+.stc{position:relative;overflow:hidden;background:linear-gradient(145deg,#0b1525,#081020);border:1px solid #1a2e4a44;border-radius:10px;padding:10px 9px 9px;text-align:center}
+.stc.on{background:linear-gradient(145deg,#0d2510,#081a0a)}
+.stcy{font-size:12px;margin-bottom:4px}.stnm{font-size:10px;font-weight:700;color:#94a3b8;line-height:1.2;margin-bottom:2px}
+.stc.on .stnm{color:#c8d8f0}
+.stct{font-size:9px;color:#3d5a7a;margin-bottom:3px}
+.stnt{font-size:8px;color:var(--gold);font-weight:700;background:#c9a22715;border-radius:3px;padding:1px 5px;margin-bottom:4px;display:inline-block}
+.stbt{border:1px solid #1a3a5a;background:transparent;color:#3d5a7a;border-radius:6px;padding:3px 10px;font-size:10px;font-weight:600;width:100%;margin-bottom:4px}
+.ccg{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.ccc{position:relative;overflow:hidden;background:linear-gradient(145deg,#0b1525,#081020);border:1px solid #1a2e4a44;border-radius:10px;padding:10px 9px 9px;text-align:center}
+.ccc.on{background:linear-gradient(145deg,#1a0505,#100303);border-color:#e5383b99}
+.ccn{font-size:9px;color:var(--red2);font-weight:800;margin-bottom:2px;letter-spacing:1px}
+.ccf{font-size:16px;margin-bottom:3px}.ccnm{font-size:10px;font-weight:700;color:#c8d8f0;line-height:1.2;margin-bottom:1px}
+.ccc.on .ccnm{color:#fca5a5}
+.ccsl{font-size:9px;color:#3d5a7a;margin-bottom:5px}
+.ccbt{border:1px solid #1a3a5a;background:transparent;color:#3d5a7a;border-radius:6px;padding:3px 10px;font-size:10px;font-weight:600;width:100%;margin-bottom:4px}
+.ccc.on .ccbt{background:var(--red2);color:#fff;border-color:var(--red2)}
+.trs{display:flex;align-items:center;justify-content:space-around;background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid #1a3a5a;border-radius:13px;padding:12px 10px;margin-bottom:14px}
+.trsi{text-align:center;flex:1}.trsn{font-size:20px;font-weight:900;line-height:1}.trsl{font-size:10px;color:var(--text3);margin-top:3px}
+.trsd{width:1px;height:30px;background:var(--border)}
+.trst{display:flex;gap:5px;margin-bottom:14px;flex-wrap:wrap}
+.trstb{flex:1;min-width:90px;padding:9px 10px;border-radius:9px;border:1px solid var(--border);background:var(--bg2);color:#64748b;font-size:11px;font-weight:600}
+.trstb.on{background:#0f1f3a;color:var(--blue2);border-color:#1d4ed8}
+.trsr{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-size:12px;margin-bottom:10px;outline:none}
+.trch{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.trchp{padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);color:#64748b;font-size:11px;font-weight:600}
+.trlh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px;flex-wrap:wrap}
+.trcpy{background:#0f2010;border:1px solid #22c55e55;color:#4ade80;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:600}
+.trgl{font-size:11px;font-weight:700;color:#64748b;margin-bottom:5px;letter-spacing:.5px}
+.trig{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;margin-bottom:12px}
+.tri{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:7px;background:var(--bg2);border:1px solid var(--border);border-left:3px solid}
+.tri span{font-size:12px;font-weight:600;color:#cbd5e1;flex:1}
+.trbdg{background:#14532d;color:#86efac;border-radius:5px;padding:1px 6px;font-size:10px;font-weight:700}
+.trsp{font-size:9px;color:var(--gold)}
+.es{color:#334155;font-size:12px;padding:14px;text-align:center}
+.trmi{background:var(--bg2);border:1px solid #c9a22733;border-radius:11px;padding:12px 14px;font-size:12px;color:#94a3b8;line-height:1.6;margin-bottom:12px}
+.trta{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:12px;margin-bottom:14px;outline:none;resize:vertical}
+.trmg{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:7px;margin-bottom:12px}
+.trmc{display:flex;align-items:center;gap:6px;padding:9px 11px;border-radius:9px;border:2px solid}
+.trbcp{width:100%;margin-top:12px;background:linear-gradient(135deg,var(--gold),#8b6914);border:none;color:#000;padding:12px;border-radius:10px;font-size:14px;font-weight:700}
+/* Loading overlay */
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+#loadingOverlay{position:fixed;inset:0;background:#07071099;backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;z-index:9999}
+.load-box{background:linear-gradient(135deg,#0d1a30,#0a1020);border:1px solid #1a3a6a;border-radius:16px;padding:36px 48px;text-align:center;max-width:320px}
+.load-ball{font-size:40px;animation:pulse 1.2s infinite;margin-bottom:14px}
+.load-title{font-size:15px;font-weight:700;color:#e2e8f0;margin-bottom:6px}
+.load-sub{font-size:11px;color:#475569;margin-bottom:20px}
+.load-bar{width:200px;height:4px;background:#0f1729;border-radius:2px;overflow:hidden;margin:0 auto}
+.load-bar-inner{height:100%;width:40%;background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:2px;animation:shimmer 1.4s infinite}
+.load-err{color:#f87171;font-size:12px;margin-top:12px;line-height:1.5}
+/* Password screen */
+#pwScreen{position:fixed;inset:0;background:#070710;display:flex;align-items:center;justify-content:center;z-index:99999}
+.pw-box{background:linear-gradient(135deg,#0d1a30,#0a1020);border:1px solid #1a3a6a;border-radius:18px;padding:40px 44px;text-align:center;max-width:340px;width:90%}
+.pw-ball{font-size:44px;margin-bottom:14px}
+.pw-title{font-size:17px;font-weight:800;color:#f1f5f9;margin-bottom:4px}
+.pw-sub{font-size:11px;color:#475569;margin-bottom:22px}
+.pw-input{width:100%;background:#0a0f1a;border:1px solid #1e3a6a;border-radius:10px;padding:12px 16px;color:#e2e8f0;font-size:15px;outline:none;text-align:center;letter-spacing:3px;margin-bottom:12px}
+.pw-input:focus{border-color:#3b82f6}
+.pw-btn{width:100%;background:linear-gradient(135deg,#c9a227,#8b6914);border:none;color:#000;padding:13px;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;margin-bottom:8px}
+.pw-err{font-size:11px;color:#f87171;height:16px;transition:opacity .3s}
+</style>
+</head>
+<body>
+
+<!-- Password Screen -->
+<div id="pwScreen">
+  <div class="pw-box">
+    <div class="pw-ball">⚽</div>
+    <div class="pw-title">Copa do Mundo 2026</div>
+    <div class="pw-sub">Digite a senha para acessar o álbum</div>
+    <input class="pw-input" id="pwInput" type="password" placeholder="••••••••" maxlength="30"
+      onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="pw-btn" onclick="checkPw()">Entrar</button>
+    <div class="pw-err" id="pwErr"> </div>
+  </div>
+</div>
+<script>
+(function(){
+  const SENHA='vida2205';
+  if(sessionStorage.getItem('copa_ok')==='1'){
+    document.getElementById('pwScreen').style.display='none';
+  }
+  window.checkPw=function(){
+    const v=document.getElementById('pwInput').value;
+    if(v===SENHA){
+      sessionStorage.setItem('copa_ok','1');
+      document.getElementById('pwScreen').style.display='none';
+    } else {
+      const e=document.getElementById('pwErr');
+      e.textContent='Senha incorreta. Tente novamente.';
+      document.getElementById('pwInput').value='';
+      document.getElementById('pwInput').focus();
+      setTimeout(()=>e.textContent=' ',2500);
+    }
+  };
+})();
+</script>
+
+<!-- Loading Overlay -->
+<div id="loadingOverlay">
+  <div class="load-box">
+    <div class="load-ball">⚽</div>
+    <div class="load-title">Carregando álbum...</div>
+    <div class="load-sub" id="loadMsg">Buscando dados no Google Sheets</div>
+    <div class="load-bar"><div class="load-bar-inner"></div></div>
+    <div class="load-err" id="loadErr" style="display:none"></div>
+  </div>
+</div>
+
+<header>
+  <div class="hi">
+    <div>
+      <div class="badge">PANINI OFICIAL · EUA / MEX / CAN</div>
+      <h1 class="ttl">⚽ Copa do Mundo FIFA 2026™</h1>
+      <p class="sub">Álbum de Figurinhas · 980 cromos · 112 páginas</p>
+    </div>
+    <div class="tbox">
+      <div><span class="tnum" id="hO">0</span><span class="tof">/980</span></div>
+      <div class="tlbl">figurinhas coladas</div>
+      <div class="bbar"><div class="bbar-f" id="hB" style="width:0%"></div></div>
+      <div class="tpct" id="hP">0% completo</div>
+      <div class="save-pill" id="savePill">💾 salvando...</div>
+    </div>
+  </div>
+</header>
+<nav id="nav"></nav>
+<main>
+  <div id="tab-dashboard" class="sec on"></div>
+  <div id="tab-fwc" class="sec"></div>
+  <div id="tab-nations" class="sec"></div>
+  <div id="tab-specials" class="sec"></div>
+  <div id="tab-trades" class="sec"></div>
+</main>
+<script>
+// ══════════════════════════════════════════════════════
+//  ⚠️  COLE AQUI A URL DO SEU WEB APP (Apps Script)
+// ══════════════════════════════════════════════════════
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxAXt1b6MYn9sF2mv6tBJ1m8LQqLJfzMKSCIYu-yfiXC0GH4ITP1d_XtyYp6y-29b6izQ/exec';
+// ══════════════════════════════════════════════════════
+
+// DATA
+const FWC_AB=[
+  {code:"FWC-01",num:1,name:"Official Emblem 1/2",sub:"Emblema Oficial FIFA 2026™",icon:"⚽"},
+  {code:"FWC-02",num:2,name:"Official Emblem 2/2",sub:"Emblema Oficial FIFA 2026™",icon:"⚽"},
+  {code:"FWC-03",num:3,name:"Official Mascots",sub:"Maple · Zayu · Clutch",icon:"🦅"},
+  {code:"FWC-04",num:4,name:"Official Slogan",sub:"Slogan Oficial FIFA 2026™",icon:"🌍"},
+  {code:"FWC-05",num:5,name:"Official Ball",sub:"Bola Oficial Adidas — Trionda",icon:"🔵"},
+  {code:"FWC-06",num:6,name:"Canada — Host Country",sub:"Host Countries & Cities",icon:"🇨🇦"},
+  {code:"FWC-07",num:7,name:"Mexico — Host Country",sub:"Host Countries & Cities",icon:"🇲🇽"},
+  {code:"FWC-08",num:8,name:"USA — Host Country",sub:"Host Countries & Cities",icon:"🇺🇸"},
+];
+const FWC_HI=[
+  {code:"FWC-09",num:9,name:"Italy 1934",sub:"FIFA World Cup Italy 1934™ — Museum",icon:"🏆"},
+  {code:"FWC-10",num:10,name:"Uruguay 1950",sub:"FIFA World Cup Brazil 1950™ — Museum",icon:"🏆"},
+  {code:"FWC-11",num:11,name:"West Germany 1954",sub:"FIFA World Cup Switzerland 1954™",icon:"🏆"},
+  {code:"FWC-12",num:12,name:"Brazil 1962",sub:"FIFA World Cup Chile 1962™ — Museum",icon:"🏆"},
+  {code:"FWC-13",num:13,name:"West Germany 1974",sub:"FIFA World Cup Germany 1974™",icon:"🏆"},
+  {code:"FWC-14",num:14,name:"Argentina 1986",sub:"FIFA World Cup Mexico 1986™ — Museum",icon:"🏆"},
+  {code:"FWC-15",num:15,name:"Brazil 1994",sub:"FIFA World Cup USA 1994™ — Museum",icon:"🏆"},
+  {code:"FWC-16",num:16,name:"Brazil 2002",sub:"FIFA World Cup Korea/Japan 2002™",icon:"🏆"},
+  {code:"FWC-17",num:17,name:"Italy 2006",sub:"FIFA World Cup Germany 2006™ — Museum",icon:"🏆"},
+  {code:"FWC-18",num:18,name:"Germany 2014",sub:"FIFA World Cup Brazil 2014™ — Museum",icon:"🏆"},
+  {code:"FWC-19",num:19,name:"Argentina 2022",sub:"FIFA World Cup Qatar 2022™ — Museum",icon:"🏆"},
+];
+const ALL_FWC=[...FWC_AB,...FWC_HI];
+const STADS=[
+  {code:"EST-AZTECA",name:"Estadio Azteca",city:"Cidade do México",country:"🇲🇽",host:"MEX",note:"🔴 Abertura 11/06"},
+  {code:"EST-AKRON",name:"Estadio Akron",city:"Guadalajara",country:"🇲🇽",host:"MEX"},
+  {code:"EST-BBVA",name:"Estadio BBVA",city:"Monterrey",country:"🇲🇽",host:"MEX"},
+  {code:"EST-BMO",name:"BMO Field",city:"Toronto",country:"🇨🇦",host:"CAN"},
+  {code:"EST-BC",name:"BC Place",city:"Vancouver",country:"🇨🇦",host:"CAN"},
+  {code:"EST-SOFI",name:"SoFi Stadium",city:"Los Angeles",country:"🇺🇸",host:"EUA"},
+  {code:"EST-LEVIS",name:"Levi's Stadium",city:"San Francisco",country:"🇺🇸",host:"EUA"},
+  {code:"EST-LUMEN",name:"Lumen Field",city:"Seattle",country:"🇺🇸",host:"EUA"},
+  {code:"EST-METLIFE",name:"MetLife Stadium",city:"Nova York / NJ",country:"🇺🇸",host:"EUA",note:"⭐ Final 19/07"},
+  {code:"EST-LINCOLN",name:"Lincoln Financial Field",city:"Filadélfia",country:"🇺🇸",host:"EUA"},
+  {code:"EST-GILLETTE",name:"Gillette Stadium",city:"Boston",country:"🇺🇸",host:"EUA"},
+  {code:"EST-HARDROCK",name:"Hard Rock Stadium",city:"Miami",country:"🇺🇸",host:"EUA",note:"🥉 3º lugar 18/07"},
+  {code:"EST-MERCEDBZ",name:"Mercedes-Benz Stadium",city:"Atlanta",country:"🇺🇸",host:"EUA"},
+  {code:"EST-ATT",name:"AT&T Stadium",city:"Dallas",country:"🇺🇸",host:"EUA"},
+  {code:"EST-NRG",name:"NRG Stadium",city:"Houston",country:"🇺🇸",host:"EUA"},
+  {code:"EST-ARROWH",name:"Arrowhead Stadium",city:"Kansas City",country:"🇺🇸",host:"EUA"},
+];
+const CC=[
+  {code:"CC-01",num:1,name:"Lamine Yamal",sel:"Espanha",flag:"🇪🇸"},
+  {code:"CC-02",num:2,name:"Joshua Kimmich",sel:"Alemanha",flag:"🇩🇪"},
+  {code:"CC-03",num:3,name:"Harry Kane",sel:"Inglaterra",flag:"🏴"},
+  {code:"CC-04",num:4,name:"Santiago Giménez",sel:"México",flag:"🇲🇽"},
+  {code:"CC-05",num:5,name:"Joško Gvardiol",sel:"Croácia",flag:"🇭🇷"},
+  {code:"CC-06",num:6,name:"Federico Valverde",sel:"Uruguai",flag:"🇺🇾"},
+  {code:"CC-07",num:7,name:"Jefferson Lerma",sel:"Colômbia",flag:"🇨🇴"},
+  {code:"CC-08",num:8,name:"Enner Valencia",sel:"Equador",flag:"🇪🇨"},
+  {code:"CC-09",num:9,name:"Gabriel Magalhães",sel:"Brasil",flag:"🇧🇷"},
+  {code:"CC-10",num:10,name:"Virgil van Dijk",sel:"Países Baixos",flag:"🇳🇱"},
+  {code:"CC-11",num:11,name:"Alphonso Davies",sel:"Canadá",flag:"🇨🇦"},
+  {code:"CC-12",num:12,name:"Emiliano Martínez",sel:"Argentina",flag:"🇦🇷"},
+  {code:"CC-13",num:13,name:"Raúl Jiménez",sel:"México",flag:"🇲🇽"},
+  {code:"CC-14",num:14,name:"Lautaro Martínez",sel:"Argentina",flag:"🇦🇷"},
+];
+const GRP=[
+  {g:"A",c:"#ef4444",ns:[{code:"MEX",name:"México",flag:"🇲🇽",abbr:"MEX"},{code:"RSA",name:"África do Sul",flag:"🇿🇦",abbr:"RSA"},{code:"KOR",name:"Coreia do Sul",flag:"🇰🇷",abbr:"KOR"},{code:"CZE",name:"Rep. Tcheca",flag:"🇨🇿",abbr:"CZE"}]},
+  {g:"B",c:"#f97316",ns:[{code:"CAN",name:"Canadá",flag:"🇨🇦",abbr:"CAN"},{code:"BIH",name:"Bósnia",flag:"🇧🇦",abbr:"BIH"},{code:"QAT",name:"Catar",flag:"🇶🇦",abbr:"QAT"},{code:"SUI",name:"Suíça",flag:"🇨🇭",abbr:"SUI"}]},
+  {g:"C",c:"#eab308",ns:[{code:"BRA",name:"Brasil",flag:"🇧🇷",abbr:"BRA"},{code:"MAR",name:"Marrocos",flag:"🇲🇦",abbr:"MAR"},{code:"HAI",name:"Haiti",flag:"🇭🇹",abbr:"HAI"},{code:"SCO",name:"Escócia",flag:"🏴",abbr:"SCO"}]},
+  {g:"D",c:"#22c55e",ns:[{code:"USA",name:"Estados Unidos",flag:"🇺🇸",abbr:"USA"},{code:"PAR",name:"Paraguai",flag:"🇵🇾",abbr:"PAR"},{code:"AUS",name:"Austrália",flag:"🇦🇺",abbr:"AUS"},{code:"TUR",name:"Turquia",flag:"🇹🇷",abbr:"TUR"}]},
+  {g:"E",c:"#14b8a6",ns:[{code:"GER",name:"Alemanha",flag:"🇩🇪",abbr:"GER"},{code:"CUW",name:"Curaçao",flag:"🇨🇼",abbr:"CUW"},{code:"CIV",name:"Costa do Marfim",flag:"🇨🇮",abbr:"CIV"},{code:"ECU",name:"Equador",flag:"🇪🇨",abbr:"ECU"}]},
+  {g:"F",c:"#3b82f6",ns:[{code:"NED",name:"Holanda",flag:"🇳🇱",abbr:"NED"},{code:"JPN",name:"Japão",flag:"🇯🇵",abbr:"JPN"},{code:"SWE",name:"Suécia",flag:"🇸🇪",abbr:"SWE"},{code:"TUN",name:"Tunísia",flag:"🇹🇳",abbr:"TUN"}]},
+  {g:"G",c:"#8b5cf6",ns:[{code:"BEL",name:"Bélgica",flag:"🇧🇪",abbr:"BEL"},{code:"EGY",name:"Egito",flag:"🇪🇬",abbr:"EGY"},{code:"IRN",name:"Irã",flag:"🇮🇷",abbr:"IRN"},{code:"NZL",name:"Nova Zelândia",flag:"🇳🇿",abbr:"NZL"}]},
+  {g:"H",c:"#ec4899",ns:[{code:"ESP",name:"Espanha",flag:"🇪🇸",abbr:"ESP"},{code:"CPV",name:"Cabo Verde",flag:"🇨🇻",abbr:"CPV"},{code:"KSA",name:"Arábia Saudita",flag:"🇸🇦",abbr:"KSA"},{code:"URU",name:"Uruguai",flag:"🇺🇾",abbr:"URU"}]},
+  {g:"I",c:"#f59e0b",ns:[{code:"FRA",name:"França",flag:"🇫🇷",abbr:"FRA"},{code:"SEN",name:"Senegal",flag:"🇸🇳",abbr:"SEN"},{code:"IRQ",name:"Iraque",flag:"🇮🇶",abbr:"IRQ"},{code:"NOR",name:"Noruega",flag:"🇳🇴",abbr:"NOR"}]},
+  {g:"J",c:"#06b6d4",ns:[{code:"ARG",name:"Argentina",flag:"🇦🇷",abbr:"ARG"},{code:"ALG",name:"Argélia",flag:"🇩🇿",abbr:"ALG"},{code:"AUT",name:"Áustria",flag:"🇦🇹",abbr:"AUT"},{code:"JOR",name:"Jordânia",flag:"🇯🇴",abbr:"JOR"}]},
+  {g:"K",c:"#84cc16",ns:[{code:"POR",name:"Portugal",flag:"🇵🇹",abbr:"POR"},{code:"COD",name:"Congo",flag:"🇨🇩",abbr:"COD"},{code:"UZB",name:"Uzbequistão",flag:"🇺🇿",abbr:"UZB"},{code:"COL",name:"Colômbia",flag:"🇨🇴",abbr:"COL"}]},
+  {g:"L",c:"#a855f7",ns:[{code:"ENG",name:"Inglaterra",flag:"🏴",abbr:"ENG"},{code:"CRO",name:"Croácia",flag:"🇭🇷",abbr:"CRO"},{code:"GHA",name:"Gana",flag:"🇬🇭",abbr:"GHA"},{code:"PAN",name:"Panamá",flag:"🇵🇦",abbr:"PAN"}]},
+];
+const ANS=GRP.flatMap(g=>g.ns.map(n=>({...n,gl:g.g,gc:g.c})));
+const FILTERS=[{k:'all',l:'Todas',c:'#94a3b8'},{k:'common',l:'Jogadores',c:'#3b82f6'},{k:'shield',l:'Escudos ✨',c:'#c9a227'},{k:'fwc',l:'FWC',c:'#c9a227'},{k:'stadium',l:'Estádios',c:'#22c55e'},{k:'cc',l:'Coca-Cola',c:'#e5383b'}];
+
+// ── STATE ──────────────────────────────────────────────────────────────────────
+function bld(){
+  const fwc={};ALL_FWC.forEach(s=>{fwc[s.code]={owned:false,repeated:0}});
+  const nations={};ANS.forEach(n=>{nations[n.code]={owned:Array(20).fill(false),repeated:Array(20).fill(0)}});
+  const stadiums={};STADS.forEach(s=>{stadiums[s.code]={owned:false,repeated:0}});
+  const cc={};CC.forEach(s=>{cc[s.code]={owned:false,repeated:0}});
+  return{fwc,nations,stadiums,cc,panini00:{owned:false,repeated:0}};
+}
+let A=bld();
+
+// ── GOOGLE SHEETS — carregar e salvar ──────────────────────────────────────────
+let _pending={};
+let _saveTimer=null;
+let _saving=0;
+
+// Salva uma figurinha na fila (debounced 600 ms)
+function sv(codigo,owned,repeated){
+  _pending[codigo]={owned,repeated};
+  if(_saveTimer)clearTimeout(_saveTimer);
+  _saveTimer=setTimeout(_flush,600);
+  _saving++;
+  _showPill(true);
+}
+
+async function _flush(){
+  const items=Object.entries(_pending);
+  _pending={};
+  for(const[codigo,d]of items){
+    try{
+      await fetch(`${SCRIPT_URL}?action=save&codigo=${encodeURIComponent(codigo)}&owned=${d.owned}&repeated=${d.repeated}&_t=${Date.now()}`);
+    }catch(e){console.warn('Erro ao salvar',codigo,e);}
+  }
+  _saving=Math.max(0,_saving-items.length);
+  _showPill(_saving>0);
+}
+
+function _showPill(on){
+  const el=document.getElementById('savePill');
+  if(el)el.style.opacity=on?'1':'0';
+}
+
+// Carrega todos os dados do Sheets e popula o estado A
+async function init(){
+  const overlay=document.getElementById('loadingOverlay');
+  const msg=document.getElementById('loadMsg');
+  const errEl=document.getElementById('loadErr');
+
+  // Valida URL configurada
+  if(!SCRIPT_URL||SCRIPT_URL.includes('COLE_A_URL')){
+    msg.textContent='⚠️ Configure a SCRIPT_URL no HTML!';
+    errEl.style.display='block';
+    errEl.innerHTML='Abra o arquivo HTML em um editor de texto e substitua <code>COLE_A_URL_DO_SEU_WEB_APP_AQUI</code> pela URL do seu Web App do Apps Script.';
+    return;
+  }
+
+  try{
+    msg.textContent='Conectando ao Google Sheets...';
+    const res=await fetch(SCRIPT_URL+'?_t='+Date.now());
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const result=await res.json();
+    if(!result.ok)throw new Error(result.error||'Resposta inválida');
+
+    const d=result.data||{};
+
+    // FWC
+    ALL_FWC.forEach(s=>{
+      if(d[s.code])A.fwc[s.code]={owned:!!d[s.code].owned,repeated:d[s.code].repeated||0};
+    });
+    // Seleções
+    ANS.forEach(n=>{
+      for(let i=0;i<20;i++){
+        const code=n.code+'-'+p2(i+1);
+        if(d[code]){A.nations[n.code].owned[i]=!!d[code].owned;A.nations[n.code].repeated[i]=d[code].repeated||0;}
+      }
+    });
+    // Estádios
+    STADS.forEach(s=>{
+      if(d[s.code])A.stadiums[s.code]={owned:!!d[s.code].owned,repeated:d[s.code].repeated||0};
+    });
+    // Coca-Cola
+    CC.forEach(s=>{
+      if(d[s.code])A.cc[s.code]={owned:!!d[s.code].owned,repeated:d[s.code].repeated||0};
+    });
+    // Panini 00
+    if(d['PANINI-00'])A.panini00={owned:!!d['PANINI-00'].owned,repeated:d['PANINI-00'].repeated||0};
+
+    msg.textContent='Pronto! ✓';
+    setTimeout(()=>{overlay.style.display='none';},400);
+
+  }catch(e){
+    console.error(e);
+    msg.textContent='Erro ao conectar :(';
+    errEl.style.display='block';
+    errEl.textContent='Detalhes: '+e.message+'\n\nVerifique se a URL está correta e se o Web App está publicado como "Qualquer pessoa".';
+    // Permite usar o app mesmo sem dados (offline mode)
+    setTimeout(()=>{overlay.style.display='none';},3000);
+  }
+
+  uh();rDB();
+}
+
+function p2(n){return String(n).padStart(2,'0')}
+function pct(a,b){return b?Math.round(a/b*100):0}
+function gstats(){
+  let fo=0,no=0,so=0,co=0,rep=0;
+  ALL_FWC.forEach(s=>{if(A.fwc[s.code]?.owned)fo++;rep+=A.fwc[s.code]?.repeated||0});
+  ANS.forEach(n=>{no+=A.nations[n.code].owned.filter(Boolean).length;A.nations[n.code].repeated.forEach(r=>rep+=r)});
+  STADS.forEach(s=>{if(A.stadiums[s.code]?.owned)so++;rep+=A.stadiums[s.code]?.repeated||0});
+  CC.forEach(s=>{if(A.cc[s.code]?.owned)co++});
+  return{fo,no,so,co,o980:fo+no+so,rep};
+}
+function uh(){const st=gstats();document.getElementById('hO').textContent=st.o980;document.getElementById('hB').style.width=pct(st.o980,980)+'%';document.getElementById('hP').textContent=pct(st.o980,980)+'% completo';}
+
+// NAV
+const TABS=[['dashboard','📊 Dashboard'],['fwc','🏆 FWC'],['nations','🌍 Seleções'],['specials','✨ Especiais'],['trades','🔄 Trocas']];
+let curTab='dashboard';
+document.getElementById('nav').innerHTML=TABS.map(([k,l])=>`<button class="tab${k==='dashboard'?' on':''}" onclick="showTab('${k}')">${l}</button>`).join('');
+function showTab(t){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tab-'+t).classList.add('on');
+  const i=TABS.findIndex(x=>x[0]===t);
+  document.querySelectorAll('.tab')[i]?.classList.add('on');
+  curTab=t;
+  const fn={dashboard:rDB,fwc:rFWC,nations:rNL,specials:rSP,trades:rTR};
+  fn[t]?.();
+}
+
+// DASHBOARD
+function rDB(){
+  const st=gstats();uh();
+  const abO=FWC_AB.filter(s=>A.fwc[s.code]?.owned).length;
+  const hiO=FWC_HI.filter(s=>A.fwc[s.code]?.owned).length;
+  const ccO=CC.filter(s=>A.cc[s.code]?.owned).length;
+  const stO=STADS.filter(s=>A.stadiums[s.code]?.owned).length;
+  document.getElementById('tab-dashboard').innerHTML=`
+  <div class="cr">
+    <div class="card"><div class="cv" style="color:var(--gold)">${st.fo}/19</div><div class="cl">FWC Abertura + História</div><div class="cs" style="color:var(--gold)">${pct(st.fo,19)}%</div></div>
+    <div class="card"><div class="cv" style="color:var(--blue)">${st.no}/960</div><div class="cl">Seleções (48×20)</div><div class="cs" style="color:var(--blue)">${pct(st.no,960)}%</div></div>
+    <div class="card"><div class="cv" style="color:var(--green)">${st.so}/16</div><div class="cl">Estádios metalizados</div><div class="cs" style="color:var(--green)">${pct(st.so,16)}%</div></div>
+    <div class="card"><div class="cv" style="color:var(--red2)">${st.co}/14</div><div class="cl">Coca-Cola (extras)</div><div class="cs" style="color:var(--red2)">fora das 980</div></div>
+  </div>
+  <div class="tc"><div class="ti">
+    <div><div class="tbig">${st.o980}<span style="font-size:16px;color:#1e3a5f">/980</span></div><div style="font-size:11px;color:var(--text3);margin-top:2px">das 980 oficiais</div></div>
+    <div class="bar"><div class="barf" style="width:${pct(st.o980,980)}%"></div></div>
+    <div style="display:flex;gap:12px">
+      <div style="text-align:center"><div style="font-size:16px;font-weight:800;color:var(--red)">${980-st.o980}</div><div style="font-size:10px;color:var(--text3)">faltam</div></div>
+      <div style="text-align:center"><div style="font-size:16px;font-weight:800;color:var(--blue2)">${st.rep}</div><div style="font-size:10px;color:var(--text3)">repetidas</div></div>
+    </div>
+  </div></div>
+  <div class="aot">📖 Ordem do Álbum</div>
+  <div class="blk"><div class="bh"><span class="btag" style="background:#f59e0b22;color:#f59e0b;border:1px solid #f59e0b44">CAPA</span><span class="bttl">Figurinha 00 — Panini</span><span class="bcnt" style="color:${A.panini00.owned?'#22c55e':'#64748b'}">${A.panini00.owned?'✓':'—'}</span></div></div>
+  <div class="blk"><div class="bh"><span class="btag" style="background:#c9a22722;color:var(--gold);border:1px solid #c9a22744">PÁG. INICIAL</span><span class="bttl">FWC-1 a FWC-8 — Abertura</span><span class="bcnt" style="color:${abO===8?'#22c55e':'#64748b'}">${abO}/8</span></div>
+  <div class="pr">${FWC_AB.map(s=>{const o=A.fwc[s.code]?.owned;return`<span class="pill ${o?'gon':''}">${o?'✓ ':''} FWC-${p2(s.num)}</span>`}).join('')}</div></div>
+  <div class="bh"><span class="btag" style="background:#3b82f622;color:var(--blue2);border:1px solid #3b82f644">PÁG. SELEÇÕES</span><span class="bttl">Grupos A → L — 48 seleções × 20</span><span class="bcnt" style="color:${st.no===960?'#22c55e':'#64748b'}">${st.no}/960</span></div>
+  <div class="gg">${GRP.map(grp=>{
+    let go=0;grp.ns.forEach(n=>{go+=A.nations[n.code].owned.filter(Boolean).length});
+    const gt=grp.ns.length*20,gp=pct(go,gt);
+    return`<div class="gc" style="border-color:${grp.c}44"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span class="gbdg" style="background:${grp.c}22;color:${grp.c}">GRUPO ${grp.g}</span><span style="font-size:12px;font-weight:800;color:${gp===100?'#22c55e':grp.c}">${gp}%</span></div>
+    ${grp.ns.map(n=>{const d=A.nations[n.code];const np=pct(d.owned.filter(Boolean).length,20);return`<div class="nr"><span style="font-size:13px">${n.flag}</span><span style="font-size:9px;color:#64748b;font-weight:700;min-width:28px">${n.abbr}</span><div style="flex:1"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#94a3b8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:72px">${n.name}</span><span style="font-size:10px;color:${np===100?'#22c55e':'#475569'}">${d.owned.filter(Boolean).length}/20</span></div><div class="nb"><div class="nbf" style="width:${np}%;background:${np===100?'#22c55e':grp.c}"></div></div></div></div>`}).join('')}
+    <div class="gbw"><div class="gbf" style="width:${gp}%;background:${grp.c}"></div></div></div>`;
+  }).join('')}</div>
+  <div class="blk" style="margin-top:8px"><div class="bh"><span class="btag" style="background:#c9a22722;color:var(--gold);border:1px solid #c9a22744">RODAPÉ</span><span class="bttl">FWC-9 a FWC-19 — FIFA World Cup History</span><span class="bcnt" style="color:${hiO===11?'#22c55e':'#64748b'}">${hiO}/11</span></div>
+  <div class="pr">${FWC_HI.map(s=>{const o=A.fwc[s.code]?.owned;return`<span class="pill ${o?'gon':''}">${o?'✓ ':''}FWC-${p2(s.num)}</span>`}).join('')}</div></div>
+  <div class="blk"><div class="bh"><span class="btag" style="background:#3b82f622;color:var(--blue2);border:1px solid #3b82f644">ESPECIAIS</span><span class="bttl">Estádios-Sede Metalizados (16)</span><span class="bcnt" style="color:${stO===16?'#22c55e':'#64748b'}">${stO}/16</span></div>
+  <div class="pr">${STADS.map(s=>{const o=A.stadiums[s.code]?.owned;return`<span class="pill ${o?'on':''}" title="${s.name}">${o?'✓':s.city.split('/')[0].trim().split(' ')[0]}</span>`}).join('')}</div></div>
+  <div class="blk"><div class="bh"><span class="btag" style="background:#e5383b22;color:var(--red2);border:1px solid #e5383b44">EXTRAS</span><span class="bttl">Figurinhas Coca-Cola — CC-1 a CC-14</span><span class="bcnt" style="color:${ccO===14?'#22c55e':'#64748b'}">${ccO}/14</span></div>
+  <div class="pr">${CC.map(s=>{const o=A.cc[s.code]?.owned;return`<span class="pill" style="${o?'background:#1a0505;border-color:#e5383b55;color:#fca5a5':''}">${o?'✓ ':''}CC-${p2(s.num)}</span>`}).join('')}</div></div>
+  <div class="ab"><span>⚡</span><span>Faltam <strong>${980-st.o980}</strong> figurinhas · <strong>${st.rep}</strong> repetidas para troca</span></div>`;
+}
+
+// FWC
+function rFWC(){
+  const all=ALL_FWC.filter(s=>A.fwc[s.code]?.owned).length;
+  const abO=FWC_AB.filter(s=>A.fwc[s.code]?.owned).length;
+  const hiO=FWC_HI.filter(s=>A.fwc[s.code]?.owned).length;
+  document.getElementById('tab-fwc').innerHTML=`
+  <div class="hb"><div class="hg"></div><div class="hst">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div>
+  <div class="httl">FIFA WORLD CUP 2026™</div><div class="hsub">Seção FWC · 19 figurinhas · Abertura + História</div>
+  <div class="hpr"><div class="hpb"><div class="hpbf" style="width:${pct(all,19)}%"></div></div><span class="hpl">${all}/19</span></div></div>
+  <div class="ch"><div class="cl2"></div><span class="clbl">FWC-1 A FWC-8 — PÁGINA INICIAL (${abO}/8)</span><div class="cl2"></div></div>
+  <div class="fwcg">${fwcCards(FWC_AB)}</div>
+  <div class="ch" style="margin-top:20px"><div class="cl2"></div><span class="clbl">FWC-9 A FWC-19 — FIFA WORLD CUP HISTORY (${hiO}/11)</span><div class="cl2"></div></div>
+  <div class="fwcg">${fwcCards(FWC_HI)}</div>`;
+}
+function fwcCards(arr){return arr.map(s=>{const d=A.fwc[s.code];const o=d?.owned;const r=d?.repeated||0;
+  return`<div class="fc ${o?'on':''}" onclick="tFWC('${s.code}')"><span class="fn">FWC-${p2(s.num)}</span><span class="ff">✨</span><div class="fi">${s.icon}</div><div class="fnam">${s.name}</div><div class="fsub">${s.sub}</div><div class="rr" onclick="event.stopPropagation()"><button class="rb" onclick="aFWC('${s.code}',-1)">−</button><span class="rl ${r>0?'h':''}">${r>0?'×'+r:'rep'}</span><button class="rb" onclick="aFWC('${s.code}',1)">+</button></div></div>`;
+}).join('');}
+function tFWC(c){A.fwc[c].owned=!A.fwc[c].owned;sv(c,A.fwc[c].owned,A.fwc[c].repeated||0);rFWC();uh();}
+function aFWC(c,d){A.fwc[c].repeated=Math.max(0,(A.fwc[c].repeated||0)+d);sv(c,A.fwc[c].owned,A.fwc[c].repeated);rFWC();}
+
+// NATIONS
+let selNat=null;
+function rNL(){
+  const q=(document.getElementById('ns')||{}).value||'';
+  const list=q?ANS.filter(n=>n.name.toLowerCase().includes(q.toLowerCase())||n.abbr.toLowerCase().includes(q.toLowerCase())):null;
+  const byG=list?[{g:'Busca',c:'#60a5fa',ns:list}]:GRP.map(g=>({...g,ns:ANS.filter(n=>n.gl===g.g)}));
+  document.getElementById('tab-nations').innerHTML=`
+  <input class="si" id="ns" type="text" placeholder="🔍 Buscar seleção..." value="${q}" oninput="rNL()">
+  ${byG.map(grp=>{
+    const go=grp.ns.reduce((a,n)=>a+A.nations[n.code].owned.filter(Boolean).length,0);
+    return`${!list?`<div class="gtt" style="color:${grp.c};border-color:${grp.c}33"><span class="gbdg" style="background:${grp.c}22;color:${grp.c};font-size:12px;padding:4px 12px">GRUPO ${grp.g}</span><span style="font-size:11px;color:#475569">${go}/${grp.ns.length*20}</span></div>`:''}
+    <div class="ng">${grp.ns.map(n=>{const d=A.nations[n.code];const o=d.owned.filter(Boolean).length;const r=d.repeated.reduce((a,b)=>a+b,0);const pp=pct(o,20);const nc=GRP.find(gg=>gg.g===n.gl)||{c:'#3b82f6'};
+      return`<div class="nc" style="border-color:${pp===100?nc.c+'88':'#1e293b'}" onclick="openNat('${n.code}')"><div style="font-size:24px;margin-bottom:4px">${n.flag}</div><div class="na">${n.abbr}</div><div class="nn">${n.name}</div><div class="ngrp" style="color:${nc.c}">Grupo ${n.gl}</div><div class="nbar"><div class="nbarf" style="width:${pp}%;background:${pp===100?'#22c55e':nc.c}"></div></div><div class="nm"><span style="color:#94a3b8">${o}/20</span>${r>0?`<span style="color:#f59e0b">🔁${r}</span>`:''}</div></div>`;
+    }).join('')}</div><br>`;
+  }).join('')}`;
+}
+function openNat(code){selNat=code;rND();}
+function rND(){
+  const n=ANS.find(x=>x.code===selNat);const d=A.nations[n.code];
+  const o=d.owned.filter(Boolean).length;const gc=GRP.find(g=>g.g===n.gl)||{c:'#3b82f6',g:n.gl};
+  const idx=ANS.findIndex(x=>x.code===selNat);
+  const pv=idx>0?ANS[idx-1]:null;const nx=idx<ANS.length-1?ANS[idx+1]:null;
+  const miss=d.owned.map((h,i)=>!h?`${n.abbr}-${p2(i+1)}`:null).filter(Boolean);
+  const reps=d.repeated.map((r,i)=>r>0?`${n.abbr}-${p2(i+1)}(×${r})`:null).filter(Boolean);
+  document.getElementById('tab-nations').innerHTML=`
+  <div class="nvb">
+    <button class="bk" onclick="rNL()">← Lista</button><div style="flex:1"></div>
+    <button class="nvbt" onclick="${pv?`openNat('${pv.code}')`:''}" ${!pv?'disabled':''}>${pv?pv.flag+' '+pv.abbr:'—'} ←</button>
+    <button class="nvbt" onclick="${nx?`openNat('${nx.code}')`:''}" ${!nx?'disabled':''}>→ ${nx?nx.abbr+' '+nx.flag:'—'}</button>
+  </div>
+  <div class="nh" style="border-color:${gc.c}66">
+    <span style="font-size:44px">${n.flag}</span>
+    <div style="flex:1">
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px"><span class="gbdg" style="background:${gc.c}22;color:${gc.c};font-size:11px">GRUPO ${gc.g}</span></div>
+      <h2 style="font-size:18px;font-weight:700;color:#f1f5f9">${n.name}</h2>
+      <div style="font-size:12px;font-weight:800;color:var(--gold);letter-spacing:2px;margin:2px 0">${n.abbr}</div>
+      <div style="font-size:12px;color:#475569;margin:2px 0">${o}/20 — ${pct(o,20)}%</div>
+      <div class="mb"><div class="mbf" style="width:${pct(o,20)}%;background:${gc.c}"></div></div>
+    </div>
+  </div>
+  <div class="sg">${Array.from({length:20},(_,i)=>{
+    const pos=i+1;const h=d.owned[i];const r=d.repeated[i];
+    const isSh=pos===1,isPh=pos===13;
+    const cc2=h?(isSh?'sc sh on':(isPh?'sc ph on':'sc on')):'sc';
+    const bc=h?(isSh?'var(--gold)':gc.c):'#334155';
+    const ic=h?(isSh?'✨':(isPh?'📷':'✅')):(isSh?'🛡️':(isPh?'📷':'○'));
+    return`<div class="${cc2}" style="border-color:${h?(isSh?'var(--gold)':gc.c+'88'):'var(--border)'}"><div class="sp">${n.abbr}-${p2(pos)}</div><button class="sbt" style="color:${bc}" onclick="tSt('${n.code}',${i})">${ic}</button><div class="slbl">${isSh?'Escudo':isPh?'Elenco':'Jog.'+pos}</div><div class="rr"><button class="rb" onclick="aNR('${n.code}',${i},-1)">−</button><span class="rl ${r>0?'h':''}">${r>0?'×'+r:'·'}</span><button class="rb" onclick="aNR('${n.code}',${i},1)">+</button></div></div>`;
+  }).join('')}</div>
+  ${miss.length?`<div class="mbox"><strong style="color:#93c5fd">🔍 Faltam (${miss.length}):</strong> <span style="color:#64748b">${miss.join(' · ')}</span></div>`:''}
+  ${reps.length?`<div class="mbox" style="border-color:#f59e0b44;margin-top:8px"><strong style="color:#f59e0b">🔁 Repetidas:</strong> <span style="color:#64748b">${reps.join(' · ')}</span></div>`:''}`;
+}
+function tSt(c,i){A.nations[c].owned[i]=!A.nations[c].owned[i];sv(c+'-'+p2(i+1),A.nations[c].owned[i],A.nations[c].repeated[i]||0);rND();uh();}
+function aNR(c,i,d){A.nations[c].repeated[i]=Math.max(0,(A.nations[c].repeated[i]||0)+d);sv(c+'-'+p2(i+1),A.nations[c].owned[i],A.nations[c].repeated[i]);rND();}
+
+// SPECIALS
+function rSP(){
+  const stO=STADS.filter(s=>A.stadiums[s.code]?.owned).length;
+  const ccO=CC.filter(s=>A.cc[s.code]?.owned).length;
+  const p00=A.panini00;
+  const hosts=[{f:'🇲🇽',n:'MÉXICO',c:'#006847',items:STADS.filter(s=>s.host==='MEX')},{f:'🇨🇦',n:'CANADÁ',c:'#d52b1e',items:STADS.filter(s=>s.host==='CAN')},{f:'🇺🇸',n:'ESTADOS UNIDOS',c:'#3c3b6e',items:STADS.filter(s=>s.host==='EUA')}];
+  document.getElementById('tab-specials').innerHTML=`
+  <div class="hb"><div class="hg"></div><div class="hst">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div>
+  <div class="httl">FIGURINHAS ESPECIAIS</div><div class="hsub">Estádios Metalizados · Coca-Cola · Panini 00</div>
+  <div class="hpr"><div class="hpb"><div class="hpbf" style="width:${pct(stO,16)}%"></div></div><span class="hpl">Estádios: ${stO}/16</span></div></div>
+  <div class="ch"><div class="cl2"></div><span class="clbl">FIGURINHA 00 — PANINI (NÃO COLÁVEL NO ÁLBUM)</span><div class="cl2"></div></div>
+  <div class="ic ic00 ${p00.owned?'on':''}">
+    <span class="b00">#00</span><div class="ii">🟡</div><div class="in" style="color:#f59e0b">Figurinha 00</div><div class="isub">Selo Panini — capa</div>
+    <button class="tb ${p00.owned?'on':''}" onclick="t00()">${p00.owned?'✓ Tenho':'Marcar'}</button>
+    <div class="rr"><button class="rb" onclick="a00(-1)">−</button><span class="rl ${(p00.repeated||0)>0?'h':''}">${(p00.repeated||0)>0?'×'+p00.repeated:'rep'}</span><button class="rb" onclick="a00(1)">+</button></div>
+  </div>
+  <div class="ch" style="margin-top:20px"><div class="cl2"></div><span class="clbl">✨ ESTÁDIOS-SEDE METALIZADOS (${stO}/16)</span><div class="cl2"></div></div>
+  ${hosts.map(h=>{const ho=h.items.filter(s=>A.stadiums[s.code]?.owned).length;return`
+    <div style="margin-bottom:20px"><div class="hdr" style="border-color:${h.c}99;background:linear-gradient(90deg,${h.c}22,transparent)">
+      <span style="font-size:18px">${h.f}</span><span class="hdrnm">${h.n}</span><span style="font-size:11px;font-weight:700;color:${ho===h.items.length?'#22c55e':'#64748b'}">${ho}/${h.items.length}</span></div>
+    <div class="stg">${h.items.map(s=>{const d=A.stadiums[s.code]||{owned:false,repeated:0};return`
+      <div class="stc ${d.owned?'on':''}"><div class="stcy">${s.country}</div><div class="stnm">${s.name}</div><div class="stct">${s.city}</div>
+      ${s.note?`<div class="stnt">${s.note}</div>`:''}
+      <button class="stbt" style="${d.owned?`background:${h.c};color:#fff;border-color:${h.c}`:''}" onclick="tST('${s.code}')">${d.owned?'✓ Tenho':'Falta'}</button>
+      <div class="rr"><button class="rb" onclick="aST('${s.code}',-1)">−</button><span class="rl ${d.repeated>0?'h':''}">${d.repeated>0?'×'+d.repeated:'·'}</span><button class="rb" onclick="aST('${s.code}',1)">+</button></div>
+      </div>`;}).join('')}</div></div>`;}).join('')}
+  <div class="ch" style="margin-top:20px"><div class="cl2"></div><span class="clbl">🥤 COCA-COLA — CC-1 a CC-14 · EXTRAS fora das 980 (${ccO}/14)</span><div class="cl2"></div></div>
+  <div style="background:#0a0c10;border:1px solid #e5383b22;border-radius:10px;padding:9px 13px;margin-bottom:12px;font-size:11px;color:#64748b">Obtidas debaixo do rótulo Coca-Cola. <strong style="color:var(--red2)">Não fazem parte das 980 oficiais</strong>.</div>
+  <div class="ccg">${CC.map(s=>{const d=A.cc[s.code]||{owned:false,repeated:0};return`
+    <div class="ccc ${d.owned?'on':''}"><div class="ccn">CC-${p2(s.num)} 🥤</div><div class="ccf">${s.flag}</div><div class="ccnm">${s.name}</div><div class="ccsl">${s.sel}</div>
+    <button class="ccbt" onclick="tCC('${s.code}')">${d.owned?'✓ Tenho':'Falta'}</button>
+    <div class="rr"><button class="rb" onclick="aCC('${s.code}',-1)">−</button><span class="rl ${d.repeated>0?'h':''}">${d.repeated>0?'×'+d.repeated:'·'}</span><button class="rb" onclick="aCC('${s.code}',1)">+</button></div>
+    </div>`;}).join('')}</div>`;
+}
+function t00(){A.panini00.owned=!A.panini00.owned;sv('PANINI-00',A.panini00.owned,A.panini00.repeated||0);rSP();uh();}
+function a00(d){A.panini00.repeated=Math.max(0,(A.panini00.repeated||0)+d);sv('PANINI-00',A.panini00.owned,A.panini00.repeated);rSP();}
+function tST(c){A.stadiums[c].owned=!A.stadiums[c].owned;sv(c,A.stadiums[c].owned,A.stadiums[c].repeated||0);rSP();uh();}
+function aST(c,d){A.stadiums[c].repeated=Math.max(0,(A.stadiums[c].repeated||0)+d);sv(c,A.stadiums[c].owned,A.stadiums[c].repeated);rSP();}
+function tCC(c){A.cc[c].owned=!A.cc[c].owned;sv(c,A.cc[c].owned,A.cc[c].repeated||0);rSP();}
+function aCC(c,d){A.cc[c].repeated=Math.max(0,(A.cc[c].repeated||0)+d);sv(c,A.cc[c].owned,A.cc[c].repeated);rSP();}
+
+// TRADES
+let trV='ofereco',trF='all';
+function bOfereco(){
+  const l=[];
+  ALL_FWC.forEach(s=>{const r=A.fwc[s.code]?.repeated||0;if(r>0)l.push({label:`FWC-${p2(s.num)}`,name:s.name,flag:'⚽',cnt:r,type:'fwc',grp:'FWC'})});
+  ANS.forEach(n=>{A.nations[n.code].repeated.forEach((r,i)=>{if(r>0){const pos=i+1;l.push({label:`${n.abbr}-${p2(pos)}`,name:n.name+' '+(pos===1?'(Escudo)':pos===13?'(Elenco)':'#'+pos),flag:n.flag,cnt:r,type:pos===1?'shield':'common',gc:n.gc,grp:n.name})}})});
+  STADS.forEach(s=>{const r=A.stadiums[s.code]?.repeated||0;if(r>0)l.push({label:s.code.replace('EST-',''),name:s.name,flag:s.country,cnt:r,type:'stadium',grp:'Estádios'})});
+  CC.forEach(s=>{const r=A.cc[s.code]?.repeated||0;if(r>0)l.push({label:`CC-${p2(s.num)}`,name:s.name,flag:s.flag,cnt:r,type:'cc',grp:'Coca-Cola'})});
+  const r00=A.panini00?.repeated||0;if(r00>0)l.push({label:'00',name:'Figurinha 00',flag:'🟡',cnt:r00,type:'cc',grp:'Panini'});
+  return l;
+}
+function bPreciso(){
+  const l=[];
+  ALL_FWC.forEach(s=>{if(!A.fwc[s.code]?.owned)l.push({label:`FWC-${p2(s.num)}`,name:s.name,flag:'⚽',type:'fwc',grp:'FWC'})});
+  ANS.forEach(n=>{A.nations[n.code].owned.forEach((h,i)=>{if(!h){const pos=i+1;l.push({label:`${n.abbr}-${p2(pos)}`,name:n.name+' '+(pos===1?'(Escudo)':pos===13?'(Elenco)':'#'+pos),flag:n.flag,type:pos===1?'shield':'common',gc:n.gc,grp:n.name})}})});
+  STADS.forEach(s=>{if(!A.stadiums[s.code]?.owned)l.push({label:s.code.replace('EST-',''),name:s.name,flag:s.country,type:'stadium',grp:'Estádios'})});
+  CC.forEach(s=>{if(!A.cc[s.code]?.owned)l.push({label:`CC-${p2(s.num)}`,name:s.name,flag:s.flag,type:'cc',grp:'Coca-Cola'})});
+  return l;
+}
+function applyTF(arr){
+  const q=(document.getElementById('trs')||{}).value||'';
+  return arr.filter(it=>{
+    if(trF!=='all'&&it.type!==trF)return false;
+    if(q)return it.label.toLowerCase().includes(q.toLowerCase())||it.name.toLowerCase().includes(q.toLowerCase())||(it.grp||'').toLowerCase().includes(q.toLowerCase());
+    return true;
+  });
+}
+function glHTML(items,showCnt){
+  const groups={};items.forEach(it=>{(groups[it.grp||'Outros']||=[]).push(it)});
+  const tc={fwc:'#c9a227',shield:'#c9a227',stadium:'#22c55e',cc:'#e5383b',common:'#3b82f6'};
+  return Object.entries(groups).map(([g,list])=>`<div class="trgl">${list[0].flag} ${g} <span style="color:#334155">· ${list.length}</span></div><div class="trig">${list.map(it=>`<div class="tri" style="border-left-color:${it.gc||tc[it.type]||'#475569'}"><span>${it.label}</span>${showCnt&&it.cnt>1?`<span class="trbdg">×${it.cnt}</span>`:''}${(it.type==='shield'||it.type==='fwc'||it.type==='stadium')?'<span class="trsp">✨</span>':''}</div>`).join('')}</div>`).join('');
+}
+function rTR(){
+  const of=bOfereco(),pr=bPreciso();
+  const fO=applyTF(of),fP=applyTF(pr);
+  const isF=trF!=='all'||((document.getElementById('trs')||{}).value||'').length>0;
+  const fl=isF?' filtrados':' tudo';
+  const specRep=of.filter(o=>['shield','fwc','stadium'].includes(o.type)).length;
+  document.getElementById('tab-trades').innerHTML=`
+  <div class="trs"><div class="trsi"><div class="trsn" style="color:var(--green)">${of.reduce((a,b)=>a+b.cnt,0)}</div><div class="trsl">repetidas</div></div>
+  <div class="trsd"></div><div class="trsi"><div class="trsn" style="color:var(--red)">${pr.length}</div><div class="trsl">faltam</div></div>
+  <div class="trsd"></div><div class="trsi"><div class="trsn" style="color:var(--gold)">${specRep}</div><div class="trsl">especiais p/ trocar</div></div></div>
+  <div class="trst"><button class="trstb ${trV==='ofereco'?'on':''}" onclick="sTRV('ofereco')">🟢 Ofereço</button><button class="trstb ${trV==='preciso'?'on':''}" onclick="sTRV('preciso')">🔴 Preciso</button><button class="trstb ${trV==='match'?'on':''}" onclick="sTRV('match')">🤝 Trocar com alguém</button></div>
+  ${trV!=='match'?`<input class="trsr" id="trs" type="text" placeholder="🔍 Buscar por código, jogador, seleção..." oninput="rTR()">
+  <div class="trch">${FILTERS.map(f=>`<button class="trchp" style="${trF===f.k?`border-color:${f.c};color:${f.c};background:${f.c}11`:''}" onclick="sTRF('${f.k}')">${f.l}</button>`).join('')}</div>`:''}
+  ${trV==='ofereco'?`<div class="trlh"><span style="color:var(--green);font-weight:700;font-size:13px">🟢 Ofereço — ${fO.length} ${fO.length===1?'item':'itens'}</span><button class="trcpy" id="cof" onclick="cpL('ofereco')">📋 Copiar${fl}</button></div>${fO.length===0?`<div class="es">${of.length===0?'Nenhuma repetida. Marque com + nas figurinhas!':'Nada com esse filtro.'}</div>`:glHTML(fO,true)}`:''}
+  ${trV==='preciso'?`<div class="trlh"><span style="color:var(--red);font-weight:700;font-size:13px">🔴 Preciso — ${fP.length} ${fP.length===1?'item':'itens'}</span><button class="trcpy" id="cpr" onclick="cpL('preciso')">📋 Copiar${fl}</button></div>${fP.length===0?`<div class="es">🏆 Tudo dessa categoria!</div>`:glHTML(fP,false)}`:''}
+  ${trV==='match'?`<div class="trmi">🤝 Cole a lista de <strong style="color:var(--gold)">repetidas</strong> da outra pessoa. O app cruza com o que <strong style="color:var(--red)">você precisa</strong>.</div>
+  <textarea class="trta" id="trp" rows="4" placeholder="Ex: BRA-7, ARG-12, FWC-03, CC-05..." oninput="rMatch()">${(document.getElementById('trp')||{}).value||''}</textarea>
+  <div id="mres"></div>`:''}`;
+}
+function sTRV(v){trV=v;rTR();}
+function sTRF(k){trF=k;rTR();}
+function rMatch(){
+  const txt=(document.getElementById('trp')||{}).value||'';
+  const pr=bPreciso(),of=bOfereco();
+  const ms=new Set(pr.map(p=>p.label.toUpperCase()));
+  const codes=txt.toUpperCase().split(/[\s,;\n]+/).map(c=>{const m=c.trim().match(/^([A-Z]+)-?(\d+)$/);return m?`${m[1]}-${p2(parseInt(m[2]))}`:c.trim()}).filter(Boolean);
+  const ps=new Set(codes);
+  if(!ps.size){document.getElementById('mres').innerHTML='';return;}
+  const recv=[...ps].filter(c=>ms.has(c));
+  const allI=[...of,...pr];const fi=lbl=>allI.find(x=>x.label.toUpperCase()===lbl)||{label:lbl,flag:'⚽',type:'common'};
+  const isS=t=>['shield','fwc','stadium'].includes(t);
+  document.getElementById('mres').innerHTML=`
+  <div class="trlh"><span style="color:var(--green);font-weight:700;font-size:14px">✅ Você recebe (${recv.length})</span><span style="font-size:11px;color:#475569">do que ela ofereceu, que te falta</span></div>
+  ${recv.length===0?`<div class="es">Nada da lista dela te serve 😕</div>`:`<div class="trmg">${recv.map(c=>{const info=fi(c);const sp=isS(info.type);return`<div class="trmc" style="border-color:${sp?'#c9a22788':'#22c55e88'};background:${sp?'#1a1500':'#0f2010'}"><span>${info.flag}</span><span style="flex:1;font-size:12px;font-weight:600;color:${sp?'#e8d48b':'#86efac'}">${c}</span>${sp?'<span style="font-size:9px;color:var(--gold)">✨</span>':''}</div>`}).join('')}</div>`}
+  <div class="trlh" style="margin-top:14px"><span style="color:var(--blue2);font-weight:700;font-size:14px">🔄 Suas repetidas para oferecer</span></div>
+  <div style="font-size:12px;color:#64748b;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 13px">Você tem <strong style="color:var(--green)">${of.reduce((a,b)=>a+b.cnt,0)}</strong> repetidas. Use <strong>🟢 Ofereço</strong> + copiar para enviar sua lista.</div>
+  ${recv.length>0?`<button class="trbcp" onclick="cpMatch(${JSON.stringify(recv)})">📋 Copiar proposta de troca</button>`:''}`;
+}
+function cpL(w){
+  const of=bOfereco(),pr=bPreciso();const fO=applyTF(of),fP=applyTF(pr);
+  const isF=trF!=='all'||((document.getElementById('trs')||{}).value||'').length>0;
+  const fl=isF?` [${FILTERS.find(f=>f.k===trF)?.l}]`:'';
+  const q=(document.getElementById('trs')||{}).value;const ql=q?` (busca: "${q}")`:'';
+  const txt=w==='preciso'?`🔴 PRECISO${fl}${ql} — Copa 2026:\n`+fP.map(p=>p.label).join(', '):`🟢 TENHO PARA TROCAR${fl}${ql} — Copa 2026:\n`+fO.map(o=>o.label+(o.cnt>1?`(x${o.cnt})`:'')).join(', ');
+  try{navigator.clipboard.writeText(txt)}catch{}
+  const btn=document.getElementById(w==='preciso'?'cpr':'cof');
+  if(btn){const orig=btn.textContent;btn.textContent='✓ Copiado!';setTimeout(()=>btn.textContent=orig,1800);}
+}
+function cpMatch(recv){
+  const of=bOfereco();const txt='🤝 PROPOSTA DE TROCA — Copa 2026\n\nEu pego de você: '+recv.join(', ')+'\n\nTe ofereço: '+of.map(o=>o.label+(o.cnt>1?`(x${o.cnt})`:'')).join(', ');
+  try{navigator.clipboard.writeText(txt)}catch{}
+  event.target.textContent='✓ Copiado!';setTimeout(()=>event.target.textContent='📋 Copiar proposta de troca',1800);
+}
+
+// INIT — carrega do Google Sheets
+init();
+</script>
+</body>
+</html>
