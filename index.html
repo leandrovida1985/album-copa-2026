@@ -359,7 +359,7 @@ async function _flush(){
   _pending={};
   for(const[codigo,d]of items){
     try{
-      await fetch(`${SCRIPT_URL}?action=save&codigo=${encodeURIComponent(codigo)}&owned=${d.owned}&repeated=${d.repeated}&_t=${Date.now()}`);
+      await fetch(`${SCRIPT_URL}?action=save&codigo=${encodeURIComponent("x"+codigo)}&owned=${d.owned}&repeated=${d.repeated}&_t=${Date.now()}`);
     }catch(e){console.warn('Erro ao salvar',codigo,e);}
   }
   _saving=Math.max(0,_saving-items.length);
@@ -392,7 +392,10 @@ async function init(){
     const result=await res.json();
     if(!result.ok)throw new Error(result.error||'Resposta inválida');
 
-    const d=result.data||{};
+    const _raw=result.data||{};
+    // Remove prefixo 'x' — salvo como xMAR-01 para evitar conversão de data no Sheets
+    const d={};
+    Object.entries(_raw).forEach(([k,v])=>{ d[k.startsWith('x')?k.slice(1):k]=v; });
 
     // FWC
     ALL_FWC.forEach(s=>{
