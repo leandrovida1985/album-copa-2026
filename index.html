@@ -153,6 +153,42 @@ main{max-width:960px;margin:0 auto;padding:16px 13px}
 .trmg{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:7px;margin-bottom:12px}
 .trmc{display:flex;align-items:center;gap:6px;padding:9px 11px;border-radius:9px;border:2px solid}
 .trbcp{width:100%;margin-top:12px;background:linear-gradient(135deg,var(--gold),#8b6914);border:none;color:#000;padding:12px;border-radius:10px;font-size:14px;font-weight:700}
+/* ── PRINT TAB ──────────────────────────────── */
+.pg-topbar{display:flex;justify-content:space-between;align-items:center;background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:13px 16px;margin-bottom:14px;gap:12px;flex-wrap:wrap}
+.pg-pbtn{background:linear-gradient(135deg,#22c55e,#16a34a);border:none;color:#fff;padding:10px 22px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer}
+.pg-preview{background:#fff;color:#111;border-radius:11px;padding:18px;border:2px solid #e5e7eb}
+.pg-head{text-align:center;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #111}
+.pg-htitle{font-size:16px;font-weight:900;letter-spacing:1px;color:#000;margin-bottom:5px}
+.pg-hsub{font-size:11px;color:#444}
+.pg-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pg-col{border:1px solid #ccc;border-radius:8px;overflow:hidden}
+.pg-chdr{font-size:11px;font-weight:800;padding:8px 12px;letter-spacing:.3px}
+.pg-cbody{padding:8px 10px}
+.pg-grp{margin-bottom:9px}
+.pg-ghdr{font-size:10px;font-weight:800;color:#222;background:#f0f0f0;padding:2px 7px;border-radius:3px;margin-bottom:3px;border-left:3px solid #aaa}
+.pg-gitems{display:grid;grid-template-columns:repeat(2,1fr);gap:1px}
+.pg-gi{display:flex;align-items:center;gap:4px;padding:2px 3px}
+.pg-ck{font-size:14px;color:#888;line-height:1;flex-shrink:0}
+.pg-glbl{font-size:11px;font-weight:700;color:#111;flex:1}
+.pg-gcnt{font-size:10px;color:#166534;font-weight:800;background:#dcfce7;border-radius:3px;padding:0 4px;white-space:nowrap}
+.pg-gnums{display:flex;flex-wrap:wrap;gap:3px}
+.pg-gnum{border:1.5px solid #aaa;border-radius:3px;padding:1px 5px;font-size:10px;min-width:24px;text-align:center;font-weight:700;color:#111}
+.pg-gcnt2{font-size:9px;font-weight:600;color:#999;margin-left:3px}
+.pg-empty{font-size:12px;color:#888;text-align:center;padding:16px}
+.pg-foot{text-align:center;font-size:9px;color:#bbb;margin-top:14px;padding-top:8px;border-top:1px solid #e5e7eb}
+.pg-nsub{margin-bottom:4px}
+.pg-nflag{font-size:12px;margin-right:3px}
+.pg-nabt{font-size:10px;font-weight:800;color:#333;margin-right:5px}
+@media print{
+  header,nav,#pwScreen,#loadingOverlay,.pg-topbar{display:none!important}
+  body{background:#fff!important;margin:0;padding:0}
+  main{max-width:100%!important;padding:0!important}
+  .pg-preview{border:none!important;padding:0!important;border-radius:0!important}
+  .sec{display:none!important}
+  #tab-print.sec{display:block!important}
+  .pg-cols{gap:8px}
+  .pg-head{margin-bottom:10px;padding-bottom:8px}
+}
 /* Loading overlay */
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 @keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
@@ -246,6 +282,7 @@ main{max-width:960px;margin:0 auto;padding:16px 13px}
   <div id="tab-nations" class="sec"></div>
   <div id="tab-specials" class="sec"></div>
   <div id="tab-trades" class="sec"></div>
+  <div id="tab-print" class="sec"></div>
 </main>
 <script>
 // ══════════════════════════════════════════════════════
@@ -447,7 +484,7 @@ function gstats(){
 function uh(){const st=gstats();document.getElementById('hO').textContent=st.o980;document.getElementById('hB').style.width=pct(st.o980,980)+'%';document.getElementById('hP').textContent=pct(st.o980,980)+'% completo';}
 
 // NAV
-const TABS=[['dashboard','📊 Dashboard'],['fwc','🏆 FWC'],['nations','🌍 Seleções'],['specials','✨ Especiais'],['trades','🔄 Trocas']];
+const TABS=[['dashboard','📊 Dashboard'],['fwc','🏆 FWC'],['nations','🌍 Seleções'],['specials','✨ Especiais'],['trades','🔄 Trocas'],['print','🖨️ Imprimir']];
 let curTab='dashboard';
 document.getElementById('nav').innerHTML=TABS.map(([k,l])=>`<button class="tab${k==='dashboard'?' on':''}" onclick="showTab('${k}')">${l}</button>`).join('');
 function showTab(t){
@@ -457,7 +494,7 @@ function showTab(t){
   const i=TABS.findIndex(x=>x[0]===t);
   document.querySelectorAll('.tab')[i]?.classList.add('on');
   curTab=t;
-  const fn={dashboard:rDB,fwc:rFWC,nations:rNL,specials:rSP,trades:rTR};
+  const fn={dashboard:rDB,fwc:rFWC,nations:rNL,specials:rSP,trades:rTR,print:rPR};
   fn[t]?.();
 }
 
@@ -703,6 +740,135 @@ function cpMatch(recv){
   const of=bOfereco();const txt='🤝 PROPOSTA DE TROCA — Copa 2026\n\nEu pego de você: '+recv.join(', ')+'\n\nTe ofereço: '+of.map(o=>o.label+(o.cnt>1?`(x${o.cnt})`:'')).join(', ');
   try{navigator.clipboard.writeText(txt)}catch{}
   event.target.textContent='✓ Copiado!';setTimeout(()=>event.target.textContent='📋 Copiar proposta de troca',1800);
+}
+
+// IMPRIMIR ─────────────────────────────────────────────────────────────────
+function rPR(){
+  const today=new Date().toLocaleDateString('pt-BR');
+
+  // ── Seções TENHO (repetidas) na ordem do álbum ─────────────────────────
+  function buildOf(){
+    const secs=[];
+    // Panini-00
+    const r00=A.panini00?.repeated||0;
+    if(r00>0)secs.push({label:'Capa',color:'#f59e0b',items:[{code:'PANINI-00',cnt:r00}]});
+    // FWC Abertura
+    const fwcAbOf=FWC_AB.filter(s=>(A.fwc[s.code]?.repeated||0)>0);
+    if(fwcAbOf.length)secs.push({label:'FWC — Abertura',color:'#c9a227',items:fwcAbOf.map(s=>({code:s.code,cnt:A.fwc[s.code].repeated}))});
+    // Grupos A-L
+    GRP.forEach(grp=>{
+      const its=[];
+      grp.ns.forEach(n=>{
+        for(let i=0;i<20;i++){const r=A.nations[n.code].repeated[i]||0;if(r>0)its.push({code:`${n.code}-${p2(i+1)}`,cnt:r});}
+      });
+      if(its.length)secs.push({label:`Grupo ${grp.g}`,color:grp.c,items:its});
+    });
+    // FWC História
+    const fwcHiOf=FWC_HI.filter(s=>(A.fwc[s.code]?.repeated||0)>0);
+    if(fwcHiOf.length)secs.push({label:'FWC — História',color:'#c9a227',items:fwcHiOf.map(s=>({code:s.code,cnt:A.fwc[s.code].repeated}))});
+    // Estádios
+    const stOf=STADS.filter(s=>(A.stadiums[s.code]?.repeated||0)>0);
+    if(stOf.length)secs.push({label:'Estádios ✨',color:'#22c55e',items:stOf.map(s=>({code:s.code.replace('EST-',''),cnt:A.stadiums[s.code].repeated}))});
+    // Coca-Cola
+    const ccOf=CC.filter(s=>(A.cc[s.code]?.repeated||0)>0);
+    if(ccOf.length)secs.push({label:'Coca-Cola',color:'#e5383b',items:ccOf.map(s=>({code:s.code,cnt:A.cc[s.code].repeated}))});
+    return secs;
+  }
+
+  // ── Seções PRECISO (faltando) na ordem do álbum ────────────────────────
+  function buildPr(){
+    const secs=[];
+    // Panini-00
+    if(!A.panini00?.owned)secs.push({label:'Capa',color:'#f59e0b',nums:['00']});
+    // FWC Abertura
+    const fwcAbPr=FWC_AB.filter(s=>!A.fwc[s.code]?.owned).map(s=>p2(s.num));
+    if(fwcAbPr.length)secs.push({label:'FWC — Abertura',color:'#c9a227',nums:fwcAbPr});
+    // Grupos A-L
+    GRP.forEach(grp=>{
+      const nations=[];
+      grp.ns.forEach(n=>{
+        const miss=[];for(let i=0;i<20;i++){if(!A.nations[n.code].owned[i])miss.push(p2(i+1));}
+        if(miss.length>0)nations.push({flag:n.flag,abbr:n.abbr,nums:miss});
+      });
+      if(nations.length)secs.push({label:`Grupo ${grp.g}`,color:grp.c,nations});
+    });
+    // FWC História
+    const fwcHiPr=FWC_HI.filter(s=>!A.fwc[s.code]?.owned).map(s=>p2(s.num));
+    if(fwcHiPr.length)secs.push({label:'FWC — História',color:'#c9a227',nums:fwcHiPr});
+    // Estádios
+    const stPr=STADS.filter(s=>!A.stadiums[s.code]?.owned).map(s=>s.code.replace('EST-',''));
+    if(stPr.length)secs.push({label:'Estádios ✨',color:'#22c55e',stads:stPr});
+    // Coca-Cola
+    const ccPr=CC.filter(s=>!A.cc[s.code]?.owned).map(s=>p2(s.num));
+    if(ccPr.length)secs.push({label:'Coca-Cola',color:'#e5383b',nums:ccPr});
+    return secs;
+  }
+
+  // ── Renderizar TENHO ────────────────────────────────────────────────────
+  function renderOf(secs){
+    if(!secs.length)return'<div class="pg-empty">Nenhuma repetida! Marque + nas figurinhas.</div>';
+    return secs.map(s=>`<div class="pg-grp">
+      <div class="pg-ghdr" style="border-left-color:${s.color}">${s.label}</div>
+      <div class="pg-gitems">${s.items.map(it=>`<div class="pg-gi"><span class="pg-ck">□</span><span class="pg-glbl">${it.code}</span>${it.cnt>1?`<span class="pg-gcnt">×${it.cnt}</span>`:''}</div>`).join('')}</div>
+    </div>`).join('');
+  }
+
+  // ── Renderizar PRECISO ──────────────────────────────────────────────────
+  function renderPr(secs){
+    if(!secs.length)return'<div class="pg-empty">🏆 Álbum completo!</div>';
+    return secs.map(s=>{
+      if(s.nations){
+        return`<div class="pg-grp">
+          <div class="pg-ghdr" style="border-left-color:${s.color}">${s.label}</div>
+          ${s.nations.map(n=>`<div class="pg-nsub"><span class="pg-nflag">${n.flag}</span><span class="pg-nabt">${n.abbr}</span><div class="pg-gnums">${n.nums.map(num=>`<span class="pg-gnum">${num}</span>`).join('')}</div></div>`).join('')}
+        </div>`;
+      }
+      if(s.stads){
+        return`<div class="pg-grp">
+          <div class="pg-ghdr" style="border-left-color:${s.color}">${s.label}</div>
+          <div class="pg-gitems">${s.stads.map(st=>`<div class="pg-gi"><span class="pg-ck">□</span><span class="pg-glbl" style="font-size:9px">${st}</span></div>`).join('')}</div>
+        </div>`;
+      }
+      return`<div class="pg-grp">
+        <div class="pg-ghdr" style="border-left-color:${s.color}">${s.label}</div>
+        <div class="pg-gnums">${s.nums.map(n=>`<span class="pg-gnum">${n}</span>`).join('')}</div>
+      </div>`;
+    }).join('');
+  }
+
+  const ofSecs=buildOf(),prSecs=buildPr();
+  const totalOf=ofSecs.reduce((a,s)=>a+(s.items?.reduce((b,it)=>b+it.cnt,0)||0),0);
+  const totalPr=prSecs.reduce((a,s)=>{
+    if(s.nations)return a+s.nations.reduce((b,n)=>b+n.nums.length,0);
+    if(s.stads)return a+s.stads.length;
+    return a+(s.nums?.length||0);
+  },0);
+
+  document.getElementById('tab-print').innerHTML=`
+  <div class="pg-topbar">
+    <div>
+      <div style="font-size:14px;font-weight:700;color:var(--text)">🖨️ Lista de Trocas</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:2px"><span style="color:var(--green);font-weight:700">${totalOf}</span> para trocar · <span style="color:var(--red);font-weight:700">${totalPr}</span> faltando · ordem do álbum</div>
+    </div>
+    <button class="pg-pbtn" onclick="window.print()">🖨️ Imprimir agora</button>
+  </div>
+  <div class="pg-preview">
+    <div class="pg-head">
+      <div class="pg-htitle">⚽ COPA DO MUNDO 2026 — LISTA DE TROCAS</div>
+      <div class="pg-hsub">Nome: ___________________________ &nbsp; Turma: _____________ &nbsp; Data: ${today}</div>
+    </div>
+    <div class="pg-cols">
+      <div class="pg-col">
+        <div class="pg-chdr" style="background:#dcfce7;color:#166534;border-bottom:2px solid #86efac">🟢 TENHO PARA TROCAR — ${totalOf} figurinha${totalOf!==1?'s':''}</div>
+        <div class="pg-cbody">${renderOf(ofSecs)}</div>
+      </div>
+      <div class="pg-col">
+        <div class="pg-chdr" style="background:#fee2e2;color:#991b1b;border-bottom:2px solid #fca5a5">🔴 PRECISO — ${totalPr} figurinha${totalPr!==1?'s':''}</div>
+        <div class="pg-cbody">${renderPr(prSecs)}</div>
+      </div>
+    </div>
+    <div class="pg-foot">Álbum Panini FIFA Copa do Mundo 2026™ — Impresso em ${today} · Marque □ ao fazer a troca ou □ ao receber</div>
+  </div>`;
 }
 
 // INIT — carrega do Google Sheets
