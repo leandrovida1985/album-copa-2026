@@ -156,62 +156,36 @@ main{max-width:960px;margin:0 auto;padding:16px 13px}
 /* ── PRINT TAB ──────────────────────────────── */
 .pg-topbar{display:flex;justify-content:space-between;align-items:center;background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:13px 16px;margin-bottom:14px;gap:12px;flex-wrap:wrap}
 .pg-pbtn{background:linear-gradient(135deg,#22c55e,#16a34a);border:none;color:#fff;padding:10px 22px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer}
-.pg-preview{background:#fff;color:#111;border-radius:11px;padding:14px;border:2px solid #e5e7eb;font-size:10px}
-/* Cada .pg-section = 1 página A4 */
-.pg-section{padding-bottom:12px;margin-bottom:12px}
-.pg-section+.pg-section{border-top:2px dashed #ccc;padding-top:12px}
-.pg-pglbl{font-size:9px;color:#bbb;letter-spacing:2px;text-transform:uppercase;text-align:center;margin-bottom:4px}
-.pg-shdr{font-size:12px;font-weight:900;padding:6px 12px;border-radius:5px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
-.pg-nameline{font-size:9px;color:#555;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid #ddd}
-/* TENHO — 4 colunas de grupos */
-.pg-of-grid{column-count:4;column-gap:10px}
-.pg-of-grp{break-inside:avoid;margin-bottom:6px}
-.pg-of-ghdr{font-size:8px;font-weight:800;color:#444;background:#f0f0f0;padding:1px 5px;border-radius:2px;margin-bottom:2px;border-left:2px solid #aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pg-of-item{display:flex;align-items:center;gap:3px;padding:1px 0}
-.pg-ck{font-size:11px;color:#ccc;flex-shrink:0;line-height:1}
-.pg-glbl{font-size:9px;font-weight:700;color:#111;flex:1}
-.pg-gcnt{font-size:8px;color:#166534;font-weight:800;background:#dcfce7;border-radius:2px;padding:0 3px}
-/* PRECISO — 3 colunas, cada seleção em 1 linha */
-.pg-pr-grid{column-count:3;column-gap:10px}
-.pg-pr-block{break-inside:avoid;margin-bottom:5px}
-.pg-pr-ghdr{font-size:8px;font-weight:800;color:#444;background:#f0f0f0;padding:1px 5px;border-radius:2px;margin-bottom:2px;border-left:2px solid #aaa}
-.pg-pr-nation{display:flex;align-items:flex-start;gap:3px;margin-bottom:3px}
-.pg-pr-lbl{font-size:8px;font-weight:800;color:#222;min-width:30px;flex-shrink:0;padding-top:1px}
-.pg-num-grid{display:flex;flex-wrap:wrap;gap:2px}
-.pg-gnum{border:1px solid #bbb;border-radius:2px;padding:0 2px;font-size:8px;min-width:16px;text-align:center;font-weight:700;color:#111;display:inline-block;line-height:14px}
-.pg-empty{font-size:11px;color:#888;text-align:center;padding:14px}
-.pg-foot{text-align:center;font-size:8px;color:#bbb;margin-top:8px;padding-top:6px;border-top:1px solid #eee}
+/* compact grid — tela */
+#pt-wrap{background:#fff;color:#111;border-radius:11px;padding:12px;border:2px solid #e5e7eb}
+#pt-legend{display:flex;gap:12px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.pt-litem{display:flex;align-items:center;gap:4px;font-size:9px;color:#555}
+.pt-gh{font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;margin:3px 0 2px;letter-spacing:1px;display:inline-block}
+.pt-row{display:flex;align-items:center;gap:1px;margin-bottom:1px;height:14px}
+.pt-fl{font-size:11px;width:16px;flex-shrink:0;text-align:center;line-height:14px}
+.pt-cd{font-size:7px;font-weight:800;width:24px;flex-shrink:0;color:#333;line-height:14px}
+.pt-bx{flex:1;height:12px;font-size:6px;font-weight:700;text-align:center;border:0.5px solid #e0e0e0;border-radius:1px;line-height:12px;overflow:hidden;min-width:0}
+.bm{background:#f9fafb;color:#ccc}
+.bo{background:#22c55e;color:#fff;border-color:#16a34a}
+.bd{background:#f97316;color:#fff;border-color:#ea580c}
+.pt-sp{border-color:transparent!important;background:transparent!important;color:transparent!important}
+#pt-foot{font-size:8px;color:#bbb;text-align:center;margin-top:8px;padding-top:5px;border-top:1px solid #f0f0f0}
 @media print{
-  @page{size:A4 landscape;margin:6mm}
+  @page{size:A4 portrait;margin:8mm}
   header,nav,#pwScreen,#loadingOverlay,.pg-topbar{display:none!important}
   body{background:#fff!important;margin:0;padding:0}
   main{max-width:100%!important;padding:0!important}
-  .pg-preview{border:none!important;padding:0!important;border-radius:0!important}
+  #pt-wrap{border:none!important;padding:0!important;border-radius:0!important;background:#fff!important}
   .sec{display:none!important}
   #tab-print.sec{display:block!important}
-  .pg-section{page-break-after:always;padding-bottom:0;margin-bottom:0}
-  .pg-section:last-child{page-break-after:auto}
-  .pg-section+.pg-section{border-top:none;padding-top:0}
-  .pg-pglbl{display:none}
-  .pg-foot{display:none}
-  .pg-shdr{font-size:9px;padding:3px 8px;margin-bottom:3px}
-  .pg-nameline{font-size:7px;margin-bottom:3px;padding-bottom:2px}
-  /* TENHO — 5 colunas, sem break-inside */
-  .pg-of-grid{column-count:6;column-gap:5px}
-  .pg-of-grp{break-inside:auto;margin-bottom:2px}
-  .pg-of-ghdr{font-size:6px;padding:0 3px;margin-bottom:1px}
-  .pg-of-item{padding:0}
-  .pg-ck{font-size:8px}
-  .pg-glbl{font-size:7px}
-  .pg-gcnt{font-size:6px;padding:0 2px}
-  /* PRECISO — números em grade 5×col, colunas dinâmicas via JS */
-  .pg-pr-grid{column-count:5;column-gap:6px}
-  .pg-pr-block{break-inside:auto;margin-bottom:5px}
-  .pg-pr-ghdr{font-size:7px;padding:1px 4px;margin-bottom:2px;break-after:avoid}
-  .pg-pr-nation{gap:3px;margin-bottom:3px;align-items:flex-start;flex-wrap:nowrap}
-  .pg-pr-lbl{font-size:7px;min-width:22px}
-  .pg-num-grid{display:grid;grid-template-columns:repeat(5,auto);gap:2px}
-  .pg-gnum{font-size:7px;min-width:13px;line-height:11px;padding:0 1px;border-width:0.5px;border-radius:1px}
+  #pt-legend{margin-bottom:1.5mm;gap:4mm}
+  .pt-litem{font-size:2.2mm;gap:1mm}
+  .pt-gh{font-size:2.2mm;line-height:3mm;height:3mm;padding:0 1.5mm;margin:0.5mm 0 0.2mm;border-radius:0.5mm;letter-spacing:0.5mm}
+  .pt-row{height:4mm;gap:0.3mm;margin-bottom:0.15mm}
+  .pt-fl{width:4.5mm;font-size:3.5mm;line-height:4mm}
+  .pt-cd{width:8mm;font-size:2.6mm;line-height:4mm}
+  .pt-bx{height:3.5mm;font-size:2mm;line-height:3.5mm;border-width:0.2mm;border-radius:0.3mm}
+  #pt-foot{font-size:1.8mm;margin-top:1mm;padding-top:0.5mm;border-top:0.2mm solid #eee}
 }
 /* Loading overlay */
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
@@ -723,141 +697,57 @@ function cpMatch(recv){
   event.target.textContent='✓ Copiado!';setTimeout(()=>event.target.textContent='📋 Copiar proposta de troca',1800);
 }
 
-// IMPRIMIR ─────────────────────────────────────────────────────────────────
+// IMPRIMIR — grid compacto A4 retrato ─────────────────────────────────────
 function rPR(){
   const today=new Date().toLocaleDateString('pt-BR');
+  const q2=n=>String(n).padStart(2,'0');
+  const sc=(owned,rep)=>rep>0?'bd':owned?'bo':'bm';
 
-  // ── TENHO (repetidas) na ordem do álbum ───────────────────────────────
-  function buildOf(){
-    const secs=[];
-    const r00=A.panini00?.repeated||0;
-    if(r00>0)secs.push({label:'Capa',color:'#f59e0b',items:[{code:'PANINI-00',cnt:r00}]});
-    const fwcAbOf=FWC_AB.filter(s=>(A.fwc[s.code]?.repeated||0)>0);
-    if(fwcAbOf.length)secs.push({label:'FWC Abertura',color:'#c9a227',items:fwcAbOf.map(s=>({code:s.code,cnt:A.fwc[s.code].repeated}))});
-    GRP.forEach(grp=>{
-      const its=[];
-      grp.ns.forEach(n=>{for(let i=0;i<20;i++){const r=A.nations[n.code].repeated[i]||0;if(r>0)its.push({code:`${n.code}-${p2(i+1)}`,cnt:r});}});
-      if(its.length)secs.push({label:`Grupo ${grp.g}`,color:grp.c,items:its});
-    });
-    const fwcHiOf=FWC_HI.filter(s=>(A.fwc[s.code]?.repeated||0)>0);
-    if(fwcHiOf.length)secs.push({label:'FWC História',color:'#c9a227',items:fwcHiOf.map(s=>({code:s.code,cnt:A.fwc[s.code].repeated}))});
-    const ccOf=CC.filter(s=>(A.cc[s.code]?.repeated||0)>0);
-    if(ccOf.length)secs.push({label:'Coca-Cola',color:'#e5383b',items:ccOf.map(s=>({code:s.code,cnt:A.cc[s.code].repeated}))});
-    return secs;
-  }
+  // FWC row: PANINI-00 (=00) + FWC-01..19 = 20 caixinhas
+  const fwcRow=`<div class="pt-row">
+    <span class="pt-fl">🏆</span><span class="pt-cd">FWC</span>
+    <span class="pt-bx ${sc(A.panini00.owned,A.panini00.repeated)}">00</span>
+    ${ALL_FWC.map(s=>`<span class="pt-bx ${sc(A.fwc[s.code]?.owned,A.fwc[s.code]?.repeated||0)}">${q2(s.num)}</span>`).join('')}
+  </div>`;
 
-  // ── PRECISO (faltando) na ordem do álbum ──────────────────────────────
-  function buildPr(){
-    const secs=[];
-    if(!A.panini00?.owned)secs.push({label:'Capa',color:'#f59e0b',nums:['00']});
-    const fwcAbPr=FWC_AB.filter(s=>!A.fwc[s.code]?.owned).map(s=>p2(s.num));
-    if(fwcAbPr.length)secs.push({label:'FWC Abertura',color:'#c9a227',nums:fwcAbPr});
-    GRP.forEach(grp=>{
-      const nations=[];
-      grp.ns.forEach(n=>{
-        const miss=[];for(let i=0;i<20;i++){if(!A.nations[n.code].owned[i])miss.push(p2(i+1));}
-        if(miss.length>0)nations.push({flag:n.flag,abbr:n.abbr,nums:miss});
-      });
-      if(nations.length)secs.push({label:`Grupo ${grp.g}`,color:grp.c,nations});
-    });
-    const fwcHiPr=FWC_HI.filter(s=>!A.fwc[s.code]?.owned).map(s=>p2(s.num));
-    if(fwcHiPr.length)secs.push({label:'FWC História',color:'#c9a227',nums:fwcHiPr});
-    const ccPr=CC.filter(s=>!A.cc[s.code]?.owned).map(s=>p2(s.num));
-    if(ccPr.length)secs.push({label:'Coca-Cola',color:'#e5383b',nums:ccPr});
-    return secs;
-  }
+  // Linhas dos grupos (A-L)
+  const grpRows=GRP.map(grp=>`<div><span class="pt-gh" style="background:${grp.c}22;color:${grp.c};border-left:2.5px solid ${grp.c}">GRUPO ${grp.g}</span></div>
+    ${grp.ns.map(n=>`<div class="pt-row">
+      <span class="pt-fl">${n.flag}</span><span class="pt-cd">${n.abbr}</span>
+      ${Array.from({length:20},(_,i)=>`<span class="pt-bx ${sc(A.nations[n.code].owned[i],A.nations[n.code].repeated[i])}">${q2(i+1)}</span>`).join('')}
+    </div>`).join('')}`).join('');
 
-  // ── Renderizar TENHO (4 colunas CSS) ──────────────────────────────────
-  function renderOf(secs){
-    if(!secs.length)return'<div class="pg-empty">Nenhuma repetida! Marque + nas figurinhas.</div>';
-    return`<div class="pg-of-grid">${secs.map(s=>`
-      <div class="pg-of-grp">
-        <div class="pg-of-ghdr" style="border-left-color:${s.color}">${s.label}</div>
-        ${s.items.map(it=>`<div class="pg-of-item"><span class="pg-ck">□</span><span class="pg-glbl">${it.code}</span>${it.cnt>1?`<span class="pg-gcnt">×${it.cnt}</span>`:''}</div>`).join('')}
-      </div>`).join('')}</div>`;
-  }
-
-  // ── Renderizar PRECISO (3 colunas CSS, 1 linha por seleção) ───────────
-  function renderPr(secs){
-    if(!secs.length)return'<div class="pg-empty">🏆 Álbum completo!</div>';
-    return`<div class="pg-pr-grid">${secs.map(s=>{
-      if(s.nations){
-        return`<div class="pg-pr-block">
-          <div class="pg-pr-ghdr" style="border-left-color:${s.color}">${s.label}</div>
-          ${s.nations.map(n=>`<div class="pg-pr-nation"><span class="pg-pr-lbl">${n.flag} ${n.abbr}</span><div class="pg-num-grid">${n.nums.map(num=>`<span class="pg-gnum">${num}</span>`).join('')}</div></div>`).join('')}
-        </div>`;
-      }
-      if(s.stads){
-        return`<div class="pg-pr-block">
-          <div class="pg-pr-ghdr" style="border-left-color:${s.color}">${s.label}</div>
-          ${s.stads.map(st=>`<div class="pg-of-item"><span class="pg-ck">□</span><span class="pg-glbl">${st}</span></div>`).join('')}
-        </div>`;
-      }
-      return`<div class="pg-pr-block">
-        <div class="pg-pr-ghdr" style="border-left-color:${s.color}">${s.label}</div>
-        <div class="pg-pr-nation">${s.nums.map(n=>`<span class="pg-gnum">${n}</span>`).join('')}</div>
-      </div>`;
-    }).join('')}</div>`;
-  }
-
-  const ofSecs=buildOf(),prSecs=buildPr();
-  const totalOf=ofSecs.reduce((a,s)=>a+(s.items?.reduce((b,it)=>b+it.cnt,0)||0),0);
-  const totalPr=prSecs.reduce((a,s)=>{
-    if(s.nations)return a+s.nations.reduce((b,n)=>b+n.nums.length,0);
-    if(s.stads)return a+s.stads.length;
-    return a+(s.nums?.length||0);
-  },0);
-
-  // Colunas de impressão calculadas pelo conteúdo real (~65px por linha, A4 landscape)
-  const ofLines=ofSecs.reduce((a,s)=>a+1+(s.items?.length||0),0);
-  // PRECISO: estima altura real em px c/ margem de segurança de 20%
-  // header=17px, linha de nums=17px, margem nação=3px, margem bloco=6px
-  const prEstH=prSecs.reduce((a,s)=>{
-    if(s.nations){const r=s.nations.reduce((b,n)=>b+Math.ceil(n.nums.length/5),0);return a+17+r*17+s.nations.length*3+6;}
-    return a+40; // FWC/CC: header+nums+margem
-  },0);
-  // 673px = 90% de 748px (A4 landscape) — garante que nunca estoura para pág 3
-  const ofCols=Math.max(2,Math.min(5,Math.ceil(ofLines/52)));
-  const prCols=Math.max(2,Math.min(5,Math.ceil(prEstH/673)));
+  // CC row: 14 caixinhas + 6 vazias para alinhar na grade de 20
+  const ccRow=`<div class="pt-row">
+    <span class="pt-fl">🥤</span><span class="pt-cd">CC</span>
+    ${CC.map(s=>`<span class="pt-bx ${sc(A.cc[s.code]?.owned,A.cc[s.code]?.repeated||0)}">${q2(s.num)}</span>`).join('')}
+    ${Array(6).fill('<span class="pt-bx pt-sp"></span>').join('')}
+  </div>`;
 
   document.getElementById('tab-print').innerHTML=`
-  <style id="pgDynStyle">@media print{
-    .pg-of-grid{column-count:${ofCols}!important}
-    .pg-pr-grid{column-count:${prCols}!important}
-  }</style>
   <div class="pg-topbar">
     <div>
-      <div style="font-size:14px;font-weight:700;color:var(--text)">🖨️ Lista de Trocas — A4</div>
-      <div style="font-size:11px;color:var(--text3);margin-top:2px"><span style="color:var(--green);font-weight:700">${totalOf}</span> para trocar · <span style="color:var(--red);font-weight:700">${totalPr}</span> faltando · Pág.1 = Tenho · Pág.2 = Preciso</div>
+      <div style="font-size:14px;font-weight:700;color:var(--text)">🖨️ Tabela de Figurinhas — A4</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:2px">
+        1 página · <span style="color:#22c55e;font-weight:700">■</span> colada ·
+        <span style="color:#f97316;font-weight:700">■</span> pra trocar ·
+        <span style="color:#ccc;font-weight:700">■</span> falta
+      </div>
     </div>
     <button class="pg-pbtn" onclick="window.print()">🖨️ Imprimir (A4)</button>
   </div>
-  <div class="pg-preview">
-
-    <!-- ══ PÁGINA 1 — TENHO PARA TROCAR ══ -->
-    <div class="pg-section">
-      <div class="pg-pglbl">— Página 1 de 2 —</div>
-      <div class="pg-shdr" style="background:#dcfce7;color:#166534">
-        🟢 TENHO PARA TROCAR<span style="font-size:10px;font-weight:600">${totalOf} figurinha${totalOf!==1?'s':''} · marque □ quando der</span>
-      </div>
-      <div class="pg-nameline">Nome: ___________________________ &nbsp;&nbsp; Turma: _____________ &nbsp;&nbsp; Data: ${today}</div>
-      ${renderOf(ofSecs)}
-      ${ofSecs.length===0?'':'<div style="margin-top:8px;font-size:8px;color:#aaa;text-align:center">⚽ Álbum Panini Copa do Mundo 2026™</div>'}
+  <div id="pt-wrap">
+    <div id="pt-legend">
+      <span class="pt-litem"><span class="pt-bx bm" style="width:16px;display:inline-block;vertical-align:middle">?</span> falta</span>
+      <span class="pt-litem"><span class="pt-bx bo" style="width:16px;display:inline-block;vertical-align:middle">✓</span> colada no álbum</span>
+      <span class="pt-litem"><span class="pt-bx bd" style="width:16px;display:inline-block;vertical-align:middle">+</span> tenho pra trocar</span>
+      <span style="margin-left:auto;font-size:8px;color:#888">Nome: _________________________________ &nbsp; Data: ${today}</span>
     </div>
-
-    <!-- ══ PÁGINA 2 — PRECISO ══ -->
-    <div class="pg-section">
-      <div class="pg-pglbl">— Página 2 de 2 —</div>
-      <div class="pg-shdr" style="background:#fee2e2;color:#991b1b">
-        🔴 PRECISO<span style="font-size:10px;font-weight:600">${totalPr} figurinha${totalPr!==1?'s':''} · marque □ quando receber</span>
-      </div>
-      <div class="pg-nameline">Nome: ___________________________ &nbsp;&nbsp; Turma: _____________ &nbsp;&nbsp; Data: ${today}</div>
-      ${renderPr(prSecs)}
-      ${prSecs.length===0?'':'<div style="margin-top:8px;font-size:8px;color:#aaa;text-align:center">⚽ Álbum Panini Copa do Mundo 2026™</div>'}
-    </div>
-
+    ${fwcRow}${grpRows}${ccRow}
+    <div id="pt-foot">⚽ Álbum Panini Copa do Mundo 2026™</div>
   </div>`;
 }
+
 
 // INIT — carrega do Google Sheets
 init();
