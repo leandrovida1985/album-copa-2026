@@ -156,38 +156,45 @@ main{max-width:960px;margin:0 auto;padding:16px 13px}
 /* ── PRINT TAB ──────────────────────────────── */
 .pg-topbar{display:flex;justify-content:space-between;align-items:center;background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:13px 16px;margin-bottom:14px;gap:12px;flex-wrap:wrap}
 .pg-pbtn{background:linear-gradient(135deg,#22c55e,#16a34a);border:none;color:#fff;padding:10px 22px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer}
-.pg-preview{background:#fff;color:#111;border-radius:11px;padding:18px;border:2px solid #e5e7eb}
-.pg-head{text-align:center;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #111}
-.pg-htitle{font-size:16px;font-weight:900;letter-spacing:1px;color:#000;margin-bottom:5px}
-.pg-hsub{font-size:11px;color:#444}
-.pg-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.pg-col{border:1px solid #ccc;border-radius:8px;overflow:hidden}
-.pg-chdr{font-size:11px;font-weight:800;padding:8px 12px;letter-spacing:.3px}
-.pg-cbody{padding:8px 10px}
-.pg-grp{margin-bottom:9px}
-.pg-ghdr{font-size:10px;font-weight:800;color:#222;background:#f0f0f0;padding:2px 7px;border-radius:3px;margin-bottom:3px;border-left:3px solid #aaa}
-.pg-gitems{display:grid;grid-template-columns:repeat(2,1fr);gap:1px}
-.pg-gi{display:flex;align-items:center;gap:4px;padding:2px 3px}
-.pg-ck{font-size:14px;color:#888;line-height:1;flex-shrink:0}
-.pg-glbl{font-size:11px;font-weight:700;color:#111;flex:1}
-.pg-gcnt{font-size:10px;color:#166534;font-weight:800;background:#dcfce7;border-radius:3px;padding:0 4px;white-space:nowrap}
-.pg-gnums{display:flex;flex-wrap:wrap;gap:3px}
-.pg-gnum{border:1.5px solid #aaa;border-radius:3px;padding:1px 5px;font-size:10px;min-width:24px;text-align:center;font-weight:700;color:#111}
-.pg-gcnt2{font-size:9px;font-weight:600;color:#999;margin-left:3px}
-.pg-empty{font-size:12px;color:#888;text-align:center;padding:16px}
-.pg-foot{text-align:center;font-size:9px;color:#bbb;margin-top:14px;padding-top:8px;border-top:1px solid #e5e7eb}
-.pg-nsub{margin-bottom:4px}
-.pg-nflag{font-size:12px;margin-right:3px}
-.pg-nabt{font-size:10px;font-weight:800;color:#333;margin-right:5px}
+.pg-preview{background:#fff;color:#111;border-radius:11px;padding:14px;border:2px solid #e5e7eb;font-size:10px}
+/* Cada .pg-section = 1 página A4 */
+.pg-section{padding-bottom:12px;margin-bottom:12px}
+.pg-section+.pg-section{border-top:2px dashed #ccc;padding-top:12px}
+.pg-pglbl{font-size:9px;color:#bbb;letter-spacing:2px;text-transform:uppercase;text-align:center;margin-bottom:4px}
+.pg-shdr{font-size:12px;font-weight:900;padding:6px 12px;border-radius:5px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+.pg-nameline{font-size:9px;color:#555;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid #ddd}
+/* TENHO — 4 colunas de grupos */
+.pg-of-grid{column-count:4;column-gap:10px}
+.pg-of-grp{break-inside:avoid;margin-bottom:6px}
+.pg-of-ghdr{font-size:8px;font-weight:800;color:#444;background:#f0f0f0;padding:1px 5px;border-radius:2px;margin-bottom:2px;border-left:2px solid #aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pg-of-item{display:flex;align-items:center;gap:3px;padding:1px 0}
+.pg-ck{font-size:11px;color:#ccc;flex-shrink:0;line-height:1}
+.pg-glbl{font-size:9px;font-weight:700;color:#111;flex:1}
+.pg-gcnt{font-size:8px;color:#166534;font-weight:800;background:#dcfce7;border-radius:2px;padding:0 3px}
+/* PRECISO — 3 colunas, cada seleção em 1 linha */
+.pg-pr-grid{column-count:3;column-gap:10px}
+.pg-pr-block{break-inside:avoid;margin-bottom:5px}
+.pg-pr-ghdr{font-size:8px;font-weight:800;color:#444;background:#f0f0f0;padding:1px 5px;border-radius:2px;margin-bottom:2px;border-left:2px solid #aaa}
+.pg-pr-nation{display:flex;flex-wrap:wrap;align-items:center;gap:2px;margin-bottom:2px}
+.pg-pr-lbl{font-size:8px;font-weight:800;color:#222;min-width:30px;flex-shrink:0}
+.pg-gnum{border:1px solid #bbb;border-radius:2px;padding:0 2px;font-size:8px;min-width:16px;text-align:center;font-weight:700;color:#111;display:inline-block;line-height:14px}
+.pg-empty{font-size:11px;color:#888;text-align:center;padding:14px}
+.pg-foot{text-align:center;font-size:8px;color:#bbb;margin-top:8px;padding-top:6px;border-top:1px solid #eee}
 @media print{
+  @page{size:A4 portrait;margin:8mm}
   header,nav,#pwScreen,#loadingOverlay,.pg-topbar{display:none!important}
-  body{background:#fff!important;margin:0;padding:0}
+  body{background:#fff!important;margin:0;padding:0;font-size:9pt}
   main{max-width:100%!important;padding:0!important}
   .pg-preview{border:none!important;padding:0!important;border-radius:0!important}
   .sec{display:none!important}
   #tab-print.sec{display:block!important}
-  .pg-cols{gap:8px}
-  .pg-head{margin-bottom:10px;padding-bottom:8px}
+  .pg-section{page-break-after:always;padding-bottom:0;margin-bottom:0}
+  .pg-section:last-child{page-break-after:auto}
+  .pg-section+.pg-section{border-top:none;padding-top:0}
+  .pg-pglbl{display:none}
+  .pg-of-grid{column-count:4}
+  .pg-pr-grid{column-count:3}
+  .pg-foot{display:none}
 }
 /* Loading overlay */
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
@@ -316,24 +323,6 @@ const FWC_HI=[
   {code:"FWC-19",num:19,name:"Argentina 2022",sub:"FIFA World Cup Qatar 2022™ — Museum",icon:"🏆"},
 ];
 const ALL_FWC=[...FWC_AB,...FWC_HI];
-const STADS=[
-  {code:"EST-AZTECA",name:"Estadio Azteca",city:"Cidade do México",country:"🇲🇽",host:"MEX",note:"🔴 Abertura 11/06"},
-  {code:"EST-AKRON",name:"Estadio Akron",city:"Guadalajara",country:"🇲🇽",host:"MEX"},
-  {code:"EST-BBVA",name:"Estadio BBVA",city:"Monterrey",country:"🇲🇽",host:"MEX"},
-  {code:"EST-BMO",name:"BMO Field",city:"Toronto",country:"🇨🇦",host:"CAN"},
-  {code:"EST-BC",name:"BC Place",city:"Vancouver",country:"🇨🇦",host:"CAN"},
-  {code:"EST-SOFI",name:"SoFi Stadium",city:"Los Angeles",country:"🇺🇸",host:"EUA"},
-  {code:"EST-LEVIS",name:"Levi's Stadium",city:"San Francisco",country:"🇺🇸",host:"EUA"},
-  {code:"EST-LUMEN",name:"Lumen Field",city:"Seattle",country:"🇺🇸",host:"EUA"},
-  {code:"EST-METLIFE",name:"MetLife Stadium",city:"Nova York / NJ",country:"🇺🇸",host:"EUA",note:"⭐ Final 19/07"},
-  {code:"EST-LINCOLN",name:"Lincoln Financial Field",city:"Filadélfia",country:"🇺🇸",host:"EUA"},
-  {code:"EST-GILLETTE",name:"Gillette Stadium",city:"Boston",country:"🇺🇸",host:"EUA"},
-  {code:"EST-HARDROCK",name:"Hard Rock Stadium",city:"Miami",country:"🇺🇸",host:"EUA",note:"🥉 3º lugar 18/07"},
-  {code:"EST-MERCEDBZ",name:"Mercedes-Benz Stadium",city:"Atlanta",country:"🇺🇸",host:"EUA"},
-  {code:"EST-ATT",name:"AT&T Stadium",city:"Dallas",country:"🇺🇸",host:"EUA"},
-  {code:"EST-NRG",name:"NRG Stadium",city:"Houston",country:"🇺🇸",host:"EUA"},
-  {code:"EST-ARROWH",name:"Arrowhead Stadium",city:"Kansas City",country:"🇺🇸",host:"EUA"},
-];
 const CC=[
   {code:"CC-01",num:1,name:"Lamine Yamal",sel:"Espanha",flag:"🇪🇸"},
   {code:"CC-02",num:2,name:"Joshua Kimmich",sel:"Alemanha",flag:"🇩🇪"},
@@ -365,15 +354,14 @@ const GRP=[
   {g:"L",c:"#a855f7",ns:[{code:"ENG",name:"Inglaterra",flag:"🏴",abbr:"ENG"},{code:"CRO",name:"Croácia",flag:"🇭🇷",abbr:"CRO"},{code:"GHA",name:"Gana",flag:"🇬🇭",abbr:"GHA"},{code:"PAN",name:"Panamá",flag:"🇵🇦",abbr:"PAN"}]},
 ];
 const ANS=GRP.flatMap(g=>g.ns.map(n=>({...n,gl:g.g,gc:g.c})));
-const FILTERS=[{k:'all',l:'Todas',c:'#94a3b8'},{k:'common',l:'Jogadores',c:'#3b82f6'},{k:'shield',l:'Escudos ✨',c:'#c9a227'},{k:'fwc',l:'FWC',c:'#c9a227'},{k:'stadium',l:'Estádios',c:'#22c55e'},{k:'cc',l:'Coca-Cola',c:'#e5383b'}];
+const FILTERS=[{k:'all',l:'Todas',c:'#94a3b8'},{k:'common',l:'Jogadores',c:'#3b82f6'},{k:'shield',l:'Escudos ✨',c:'#c9a227'},{k:'fwc',l:'FWC',c:'#c9a227'},{k:'cc',l:'Coca-Cola',c:'#e5383b'}];
 
 // ── STATE ──────────────────────────────────────────────────────────────────────
 function bld(){
   const fwc={};ALL_FWC.forEach(s=>{fwc[s.code]={owned:false,repeated:0}});
   const nations={};ANS.forEach(n=>{nations[n.code]={owned:Array(20).fill(false),repeated:Array(20).fill(0)}});
-  const stadiums={};STADS.forEach(s=>{stadiums[s.code]={owned:false,repeated:0}});
   const cc={};CC.forEach(s=>{cc[s.code]={owned:false,repeated:0}});
-  return{fwc,nations,stadiums,cc,panini00:{owned:false,repeated:0}};
+  return{fwc,nations,cc,panini00:{owned:false,repeated:0}};
 }
 let A=bld();
 
@@ -445,10 +433,6 @@ async function init(){
         if(d[code]){A.nations[n.code].owned[i]=!!d[code].owned;A.nations[n.code].repeated[i]=d[code].repeated||0;}
       }
     });
-    // Estádios
-    STADS.forEach(s=>{
-      if(d[s.code])A.stadiums[s.code]={owned:!!d[s.code].owned,repeated:d[s.code].repeated||0};
-    });
     // Coca-Cola
     CC.forEach(s=>{
       if(d[s.code])A.cc[s.code]={owned:!!d[s.code].owned,repeated:d[s.code].repeated||0};
@@ -474,12 +458,12 @@ async function init(){
 function p2(n){return String(n).padStart(2,'0')}
 function pct(a,b){return b?Math.round(a/b*100):0}
 function gstats(){
-  let fo=0,no=0,so=0,co=0,rep=0;
+  let fo=0,no=0,co=0,rep=0;
   ALL_FWC.forEach(s=>{if(A.fwc[s.code]?.owned)fo++;rep+=A.fwc[s.code]?.repeated||0});
   ANS.forEach(n=>{no+=A.nations[n.code].owned.filter(Boolean).length;A.nations[n.code].repeated.forEach(r=>rep+=r)});
-  STADS.forEach(s=>{if(A.stadiums[s.code]?.owned)so++;rep+=A.stadiums[s.code]?.repeated||0});
-  CC.forEach(s=>{if(A.cc[s.code]?.owned)co++});
-  return{fo,no,so,co,o980:fo+no+so,rep};
+  CC.forEach(s=>{if(A.cc[s.code]?.owned)co++;rep+=A.cc[s.code]?.repeated||0});
+  const p00=A.panini00?.owned?1:0;
+  return{fo,no,co,o980:p00+fo+no,rep};
 }
 function uh(){const st=gstats();document.getElementById('hO').textContent=st.o980;document.getElementById('hB').style.width=pct(st.o980,980)+'%';document.getElementById('hP').textContent=pct(st.o980,980)+'% completo';}
 
@@ -504,12 +488,10 @@ function rDB(){
   const abO=FWC_AB.filter(s=>A.fwc[s.code]?.owned).length;
   const hiO=FWC_HI.filter(s=>A.fwc[s.code]?.owned).length;
   const ccO=CC.filter(s=>A.cc[s.code]?.owned).length;
-  const stO=STADS.filter(s=>A.stadiums[s.code]?.owned).length;
   document.getElementById('tab-dashboard').innerHTML=`
   <div class="cr">
     <div class="card"><div class="cv" style="color:var(--gold)">${st.fo}/19</div><div class="cl">FWC Abertura + História</div><div class="cs" style="color:var(--gold)">${pct(st.fo,19)}%</div></div>
     <div class="card"><div class="cv" style="color:var(--blue)">${st.no}/960</div><div class="cl">Seleções (48×20)</div><div class="cs" style="color:var(--blue)">${pct(st.no,960)}%</div></div>
-    <div class="card"><div class="cv" style="color:var(--green)">${st.so}/16</div><div class="cl">Estádios metalizados</div><div class="cs" style="color:var(--green)">${pct(st.so,16)}%</div></div>
     <div class="card"><div class="cv" style="color:var(--red2)">${st.co}/14</div><div class="cl">Coca-Cola (extras)</div><div class="cs" style="color:var(--red2)">fora das 980</div></div>
   </div>
   <div class="tc"><div class="ti">
@@ -534,8 +516,6 @@ function rDB(){
   }).join('')}</div>
   <div class="blk" style="margin-top:8px"><div class="bh"><span class="btag" style="background:#c9a22722;color:var(--gold);border:1px solid #c9a22744">RODAPÉ</span><span class="bttl">FWC-9 a FWC-19 — FIFA World Cup History</span><span class="bcnt" style="color:${hiO===11?'#22c55e':'#64748b'}">${hiO}/11</span></div>
   <div class="pr">${FWC_HI.map(s=>{const o=A.fwc[s.code]?.owned;return`<span class="pill ${o?'gon':''}">${o?'✓ ':''}FWC-${p2(s.num)}</span>`}).join('')}</div></div>
-  <div class="blk"><div class="bh"><span class="btag" style="background:#3b82f622;color:var(--blue2);border:1px solid #3b82f644">ESPECIAIS</span><span class="bttl">Estádios-Sede Metalizados (16)</span><span class="bcnt" style="color:${stO===16?'#22c55e':'#64748b'}">${stO}/16</span></div>
-  <div class="pr">${STADS.map(s=>{const o=A.stadiums[s.code]?.owned;return`<span class="pill ${o?'on':''}" title="${s.name}">${o?'✓':s.city.split('/')[0].trim().split(' ')[0]}</span>`}).join('')}</div></div>
   <div class="blk"><div class="bh"><span class="btag" style="background:#e5383b22;color:var(--red2);border:1px solid #e5383b44">EXTRAS</span><span class="bttl">Figurinhas Coca-Cola — CC-1 a CC-14</span><span class="bcnt" style="color:${ccO===14?'#22c55e':'#64748b'}">${ccO}/14</span></div>
   <div class="pr">${CC.map(s=>{const o=A.cc[s.code]?.owned;return`<span class="pill" style="${o?'background:#1a0505;border-color:#e5383b55;color:#fca5a5':''}">${o?'✓ ':''}CC-${p2(s.num)}</span>`}).join('')}</div></div>
   <div class="ab"><span>⚡</span><span>Faltam <strong>${980-st.o980}</strong> figurinhas · <strong>${st.rep}</strong> repetidas para troca</span></div>`;
@@ -617,30 +597,18 @@ function aNR(c,i,d){A.nations[c].repeated[i]=Math.max(0,(A.nations[c].repeated[i
 
 // SPECIALS
 function rSP(){
-  const stO=STADS.filter(s=>A.stadiums[s.code]?.owned).length;
   const ccO=CC.filter(s=>A.cc[s.code]?.owned).length;
   const p00=A.panini00;
-  const hosts=[{f:'🇲🇽',n:'MÉXICO',c:'#006847',items:STADS.filter(s=>s.host==='MEX')},{f:'🇨🇦',n:'CANADÁ',c:'#d52b1e',items:STADS.filter(s=>s.host==='CAN')},{f:'🇺🇸',n:'ESTADOS UNIDOS',c:'#3c3b6e',items:STADS.filter(s=>s.host==='EUA')}];
   document.getElementById('tab-specials').innerHTML=`
   <div class="hb"><div class="hg"></div><div class="hst">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div>
-  <div class="httl">FIGURINHAS ESPECIAIS</div><div class="hsub">Estádios Metalizados · Coca-Cola · Panini 00</div>
-  <div class="hpr"><div class="hpb"><div class="hpbf" style="width:${pct(stO,16)}%"></div></div><span class="hpl">Estádios: ${stO}/16</span></div></div>
-  <div class="ch"><div class="cl2"></div><span class="clbl">FIGURINHA 00 — PANINI (NÃO COLÁVEL NO ÁLBUM)</span><div class="cl2"></div></div>
+  <div class="httl">FIGURINHAS ESPECIAIS</div><div class="hsub">Figurinha 00 Panini · Coca-Cola (extras)</div>
+  <div class="hpr"><div class="hpb"><div class="hpbf" style="width:${pct(ccO,14)}%"></div></div><span class="hpl">CC: ${ccO}/14</span></div></div>
+  <div class="ch"><div class="cl2"></div><span class="clbl">FIGURINHA 00 — PANINI</span><div class="cl2"></div></div>
   <div class="ic ic00 ${p00.owned?'on':''}">
     <span class="b00">#00</span><div class="ii">🟡</div><div class="in" style="color:#f59e0b">Figurinha 00</div><div class="isub">Selo Panini — capa</div>
     <button class="tb ${p00.owned?'on':''}" onclick="t00()">${p00.owned?'✓ Tenho':'Marcar'}</button>
     <div class="rr"><button class="rb" onclick="a00(-1)">−</button><span class="rl ${(p00.repeated||0)>0?'h':''}">${(p00.repeated||0)>0?'×'+p00.repeated:'rep'}</span><button class="rb" onclick="a00(1)">+</button></div>
   </div>
-  <div class="ch" style="margin-top:20px"><div class="cl2"></div><span class="clbl">✨ ESTÁDIOS-SEDE METALIZADOS (${stO}/16)</span><div class="cl2"></div></div>
-  ${hosts.map(h=>{const ho=h.items.filter(s=>A.stadiums[s.code]?.owned).length;return`
-    <div style="margin-bottom:20px"><div class="hdr" style="border-color:${h.c}99;background:linear-gradient(90deg,${h.c}22,transparent)">
-      <span style="font-size:18px">${h.f}</span><span class="hdrnm">${h.n}</span><span style="font-size:11px;font-weight:700;color:${ho===h.items.length?'#22c55e':'#64748b'}">${ho}/${h.items.length}</span></div>
-    <div class="stg">${h.items.map(s=>{const d=A.stadiums[s.code]||{owned:false,repeated:0};return`
-      <div class="stc ${d.owned?'on':''}"><div class="stcy">${s.country}</div><div class="stnm">${s.name}</div><div class="stct">${s.city}</div>
-      ${s.note?`<div class="stnt">${s.note}</div>`:''}
-      <button class="stbt" style="${d.owned?`background:${h.c};color:#fff;border-color:${h.c}`:''}" onclick="tST('${s.code}')">${d.owned?'✓ Tenho':'Falta'}</button>
-      <div class="rr"><button class="rb" onclick="aST('${s.code}',-1)">−</button><span class="rl ${d.repeated>0?'h':''}">${d.repeated>0?'×'+d.repeated:'·'}</span><button class="rb" onclick="aST('${s.code}',1)">+</button></div>
-      </div>`;}).join('')}</div></div>`;}).join('')}
   <div class="ch" style="margin-top:20px"><div class="cl2"></div><span class="clbl">🥤 COCA-COLA — CC-1 a CC-14 · EXTRAS fora das 980 (${ccO}/14)</span><div class="cl2"></div></div>
   <div style="background:#0a0c10;border:1px solid #e5383b22;border-radius:10px;padding:9px 13px;margin-bottom:12px;font-size:11px;color:#64748b">Obtidas debaixo do rótulo Coca-Cola. <strong style="color:var(--red2)">Não fazem parte das 980 oficiais</strong>.</div>
   <div class="ccg">${CC.map(s=>{const d=A.cc[s.code]||{owned:false,repeated:0};return`
@@ -651,8 +619,6 @@ function rSP(){
 }
 function t00(){A.panini00.owned=!A.panini00.owned;sv('PANINI-00',A.panini00.owned,A.panini00.repeated||0);rSP();uh();}
 function a00(d){A.panini00.repeated=Math.max(0,(A.panini00.repeated||0)+d);sv('PANINI-00',A.panini00.owned,A.panini00.repeated);rSP();}
-function tST(c){A.stadiums[c].owned=!A.stadiums[c].owned;sv(c,A.stadiums[c].owned,A.stadiums[c].repeated||0);rSP();uh();}
-function aST(c,d){A.stadiums[c].repeated=Math.max(0,(A.stadiums[c].repeated||0)+d);sv(c,A.stadiums[c].owned,A.stadiums[c].repeated);rSP();}
 function tCC(c){A.cc[c].owned=!A.cc[c].owned;sv(c,A.cc[c].owned,A.cc[c].repeated||0);rSP();}
 function aCC(c,d){A.cc[c].repeated=Math.max(0,(A.cc[c].repeated||0)+d);sv(c,A.cc[c].owned,A.cc[c].repeated);rSP();}
 
@@ -662,7 +628,6 @@ function bOfereco(){
   const l=[];
   ALL_FWC.forEach(s=>{const r=A.fwc[s.code]?.repeated||0;if(r>0)l.push({label:`FWC-${p2(s.num)}`,name:s.name,flag:'⚽',cnt:r,type:'fwc',grp:'FWC'})});
   ANS.forEach(n=>{A.nations[n.code].repeated.forEach((r,i)=>{if(r>0){const pos=i+1;l.push({label:`${n.abbr}-${p2(pos)}`,name:n.name+' '+(pos===1?'(Escudo)':pos===13?'(Elenco)':'#'+pos),flag:n.flag,cnt:r,type:pos===1?'shield':'common',gc:n.gc,grp:n.name})}})});
-  STADS.forEach(s=>{const r=A.stadiums[s.code]?.repeated||0;if(r>0)l.push({label:s.code.replace('EST-',''),name:s.name,flag:s.country,cnt:r,type:'stadium',grp:'Estádios'})});
   CC.forEach(s=>{const r=A.cc[s.code]?.repeated||0;if(r>0)l.push({label:`CC-${p2(s.num)}`,name:s.name,flag:s.flag,cnt:r,type:'cc',grp:'Coca-Cola'})});
   const r00=A.panini00?.repeated||0;if(r00>0)l.push({label:'00',name:'Figurinha 00',flag:'🟡',cnt:r00,type:'cc',grp:'Panini'});
   return l;
@@ -671,7 +636,6 @@ function bPreciso(){
   const l=[];
   ALL_FWC.forEach(s=>{if(!A.fwc[s.code]?.owned)l.push({label:`FWC-${p2(s.num)}`,name:s.name,flag:'⚽',type:'fwc',grp:'FWC'})});
   ANS.forEach(n=>{A.nations[n.code].owned.forEach((h,i)=>{if(!h){const pos=i+1;l.push({label:`${n.abbr}-${p2(pos)}`,name:n.name+' '+(pos===1?'(Escudo)':pos===13?'(Elenco)':'#'+pos),flag:n.flag,type:pos===1?'shield':'common',gc:n.gc,grp:n.name})}})});
-  STADS.forEach(s=>{if(!A.stadiums[s.code]?.owned)l.push({label:s.code.replace('EST-',''),name:s.name,flag:s.country,type:'stadium',grp:'Estádios'})});
   CC.forEach(s=>{if(!A.cc[s.code]?.owned)l.push({label:`CC-${p2(s.num)}`,name:s.name,flag:s.flag,type:'cc',grp:'Coca-Cola'})});
   return l;
 }
@@ -746,44 +710,31 @@ function cpMatch(recv){
 function rPR(){
   const today=new Date().toLocaleDateString('pt-BR');
 
-  // ── Seções TENHO (repetidas) na ordem do álbum ─────────────────────────
+  // ── TENHO (repetidas) na ordem do álbum ───────────────────────────────
   function buildOf(){
     const secs=[];
-    // Panini-00
     const r00=A.panini00?.repeated||0;
     if(r00>0)secs.push({label:'Capa',color:'#f59e0b',items:[{code:'PANINI-00',cnt:r00}]});
-    // FWC Abertura
     const fwcAbOf=FWC_AB.filter(s=>(A.fwc[s.code]?.repeated||0)>0);
-    if(fwcAbOf.length)secs.push({label:'FWC — Abertura',color:'#c9a227',items:fwcAbOf.map(s=>({code:s.code,cnt:A.fwc[s.code].repeated}))});
-    // Grupos A-L
+    if(fwcAbOf.length)secs.push({label:'FWC Abertura',color:'#c9a227',items:fwcAbOf.map(s=>({code:s.code,cnt:A.fwc[s.code].repeated}))});
     GRP.forEach(grp=>{
       const its=[];
-      grp.ns.forEach(n=>{
-        for(let i=0;i<20;i++){const r=A.nations[n.code].repeated[i]||0;if(r>0)its.push({code:`${n.code}-${p2(i+1)}`,cnt:r});}
-      });
+      grp.ns.forEach(n=>{for(let i=0;i<20;i++){const r=A.nations[n.code].repeated[i]||0;if(r>0)its.push({code:`${n.code}-${p2(i+1)}`,cnt:r});}});
       if(its.length)secs.push({label:`Grupo ${grp.g}`,color:grp.c,items:its});
     });
-    // FWC História
     const fwcHiOf=FWC_HI.filter(s=>(A.fwc[s.code]?.repeated||0)>0);
-    if(fwcHiOf.length)secs.push({label:'FWC — História',color:'#c9a227',items:fwcHiOf.map(s=>({code:s.code,cnt:A.fwc[s.code].repeated}))});
-    // Estádios
-    const stOf=STADS.filter(s=>(A.stadiums[s.code]?.repeated||0)>0);
-    if(stOf.length)secs.push({label:'Estádios ✨',color:'#22c55e',items:stOf.map(s=>({code:s.code.replace('EST-',''),cnt:A.stadiums[s.code].repeated}))});
-    // Coca-Cola
+    if(fwcHiOf.length)secs.push({label:'FWC História',color:'#c9a227',items:fwcHiOf.map(s=>({code:s.code,cnt:A.fwc[s.code].repeated}))});
     const ccOf=CC.filter(s=>(A.cc[s.code]?.repeated||0)>0);
     if(ccOf.length)secs.push({label:'Coca-Cola',color:'#e5383b',items:ccOf.map(s=>({code:s.code,cnt:A.cc[s.code].repeated}))});
     return secs;
   }
 
-  // ── Seções PRECISO (faltando) na ordem do álbum ────────────────────────
+  // ── PRECISO (faltando) na ordem do álbum ──────────────────────────────
   function buildPr(){
     const secs=[];
-    // Panini-00
     if(!A.panini00?.owned)secs.push({label:'Capa',color:'#f59e0b',nums:['00']});
-    // FWC Abertura
     const fwcAbPr=FWC_AB.filter(s=>!A.fwc[s.code]?.owned).map(s=>p2(s.num));
-    if(fwcAbPr.length)secs.push({label:'FWC — Abertura',color:'#c9a227',nums:fwcAbPr});
-    // Grupos A-L
+    if(fwcAbPr.length)secs.push({label:'FWC Abertura',color:'#c9a227',nums:fwcAbPr});
     GRP.forEach(grp=>{
       const nations=[];
       grp.ns.forEach(n=>{
@@ -792,48 +743,44 @@ function rPR(){
       });
       if(nations.length)secs.push({label:`Grupo ${grp.g}`,color:grp.c,nations});
     });
-    // FWC História
     const fwcHiPr=FWC_HI.filter(s=>!A.fwc[s.code]?.owned).map(s=>p2(s.num));
-    if(fwcHiPr.length)secs.push({label:'FWC — História',color:'#c9a227',nums:fwcHiPr});
-    // Estádios
-    const stPr=STADS.filter(s=>!A.stadiums[s.code]?.owned).map(s=>s.code.replace('EST-',''));
-    if(stPr.length)secs.push({label:'Estádios ✨',color:'#22c55e',stads:stPr});
-    // Coca-Cola
+    if(fwcHiPr.length)secs.push({label:'FWC História',color:'#c9a227',nums:fwcHiPr});
     const ccPr=CC.filter(s=>!A.cc[s.code]?.owned).map(s=>p2(s.num));
     if(ccPr.length)secs.push({label:'Coca-Cola',color:'#e5383b',nums:ccPr});
     return secs;
   }
 
-  // ── Renderizar TENHO ────────────────────────────────────────────────────
+  // ── Renderizar TENHO (4 colunas CSS) ──────────────────────────────────
   function renderOf(secs){
     if(!secs.length)return'<div class="pg-empty">Nenhuma repetida! Marque + nas figurinhas.</div>';
-    return secs.map(s=>`<div class="pg-grp">
-      <div class="pg-ghdr" style="border-left-color:${s.color}">${s.label}</div>
-      <div class="pg-gitems">${s.items.map(it=>`<div class="pg-gi"><span class="pg-ck">□</span><span class="pg-glbl">${it.code}</span>${it.cnt>1?`<span class="pg-gcnt">×${it.cnt}</span>`:''}</div>`).join('')}</div>
-    </div>`).join('');
+    return`<div class="pg-of-grid">${secs.map(s=>`
+      <div class="pg-of-grp">
+        <div class="pg-of-ghdr" style="border-left-color:${s.color}">${s.label}</div>
+        ${s.items.map(it=>`<div class="pg-of-item"><span class="pg-ck">□</span><span class="pg-glbl">${it.code}</span>${it.cnt>1?`<span class="pg-gcnt">×${it.cnt}</span>`:''}</div>`).join('')}
+      </div>`).join('')}</div>`;
   }
 
-  // ── Renderizar PRECISO ──────────────────────────────────────────────────
+  // ── Renderizar PRECISO (3 colunas CSS, 1 linha por seleção) ───────────
   function renderPr(secs){
     if(!secs.length)return'<div class="pg-empty">🏆 Álbum completo!</div>';
-    return secs.map(s=>{
+    return`<div class="pg-pr-grid">${secs.map(s=>{
       if(s.nations){
-        return`<div class="pg-grp">
-          <div class="pg-ghdr" style="border-left-color:${s.color}">${s.label}</div>
-          ${s.nations.map(n=>`<div class="pg-nsub"><span class="pg-nflag">${n.flag}</span><span class="pg-nabt">${n.abbr}</span><div class="pg-gnums">${n.nums.map(num=>`<span class="pg-gnum">${num}</span>`).join('')}</div></div>`).join('')}
+        return`<div class="pg-pr-block">
+          <div class="pg-pr-ghdr" style="border-left-color:${s.color}">${s.label}</div>
+          ${s.nations.map(n=>`<div class="pg-pr-nation"><span class="pg-pr-lbl">${n.flag} ${n.abbr}</span>${n.nums.map(num=>`<span class="pg-gnum">${num}</span>`).join('')}</div>`).join('')}
         </div>`;
       }
       if(s.stads){
-        return`<div class="pg-grp">
-          <div class="pg-ghdr" style="border-left-color:${s.color}">${s.label}</div>
-          <div class="pg-gitems">${s.stads.map(st=>`<div class="pg-gi"><span class="pg-ck">□</span><span class="pg-glbl" style="font-size:9px">${st}</span></div>`).join('')}</div>
+        return`<div class="pg-pr-block">
+          <div class="pg-pr-ghdr" style="border-left-color:${s.color}">${s.label}</div>
+          ${s.stads.map(st=>`<div class="pg-of-item"><span class="pg-ck">□</span><span class="pg-glbl">${st}</span></div>`).join('')}
         </div>`;
       }
-      return`<div class="pg-grp">
-        <div class="pg-ghdr" style="border-left-color:${s.color}">${s.label}</div>
-        <div class="pg-gnums">${s.nums.map(n=>`<span class="pg-gnum">${n}</span>`).join('')}</div>
+      return`<div class="pg-pr-block">
+        <div class="pg-pr-ghdr" style="border-left-color:${s.color}">${s.label}</div>
+        <div class="pg-pr-nation">${s.nums.map(n=>`<span class="pg-gnum">${n}</span>`).join('')}</div>
       </div>`;
-    }).join('');
+    }).join('')}</div>`;
   }
 
   const ofSecs=buildOf(),prSecs=buildPr();
@@ -847,27 +794,35 @@ function rPR(){
   document.getElementById('tab-print').innerHTML=`
   <div class="pg-topbar">
     <div>
-      <div style="font-size:14px;font-weight:700;color:var(--text)">🖨️ Lista de Trocas</div>
-      <div style="font-size:11px;color:var(--text3);margin-top:2px"><span style="color:var(--green);font-weight:700">${totalOf}</span> para trocar · <span style="color:var(--red);font-weight:700">${totalPr}</span> faltando · ordem do álbum</div>
+      <div style="font-size:14px;font-weight:700;color:var(--text)">🖨️ Lista de Trocas — A4</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:2px"><span style="color:var(--green);font-weight:700">${totalOf}</span> para trocar · <span style="color:var(--red);font-weight:700">${totalPr}</span> faltando · Pág.1 = Tenho · Pág.2 = Preciso</div>
     </div>
-    <button class="pg-pbtn" onclick="window.print()">🖨️ Imprimir agora</button>
+    <button class="pg-pbtn" onclick="window.print()">🖨️ Imprimir (A4)</button>
   </div>
   <div class="pg-preview">
-    <div class="pg-head">
-      <div class="pg-htitle">⚽ COPA DO MUNDO 2026 — LISTA DE TROCAS</div>
-      <div class="pg-hsub">Nome: ___________________________ &nbsp; Turma: _____________ &nbsp; Data: ${today}</div>
-    </div>
-    <div class="pg-cols">
-      <div class="pg-col">
-        <div class="pg-chdr" style="background:#dcfce7;color:#166534;border-bottom:2px solid #86efac">🟢 TENHO PARA TROCAR — ${totalOf} figurinha${totalOf!==1?'s':''}</div>
-        <div class="pg-cbody">${renderOf(ofSecs)}</div>
+
+    <!-- ══ PÁGINA 1 — TENHO PARA TROCAR ══ -->
+    <div class="pg-section">
+      <div class="pg-pglbl">— Página 1 de 2 —</div>
+      <div class="pg-shdr" style="background:#dcfce7;color:#166534">
+        🟢 TENHO PARA TROCAR<span style="font-size:10px;font-weight:600">${totalOf} figurinha${totalOf!==1?'s':''} · marque □ quando der</span>
       </div>
-      <div class="pg-col">
-        <div class="pg-chdr" style="background:#fee2e2;color:#991b1b;border-bottom:2px solid #fca5a5">🔴 PRECISO — ${totalPr} figurinha${totalPr!==1?'s':''}</div>
-        <div class="pg-cbody">${renderPr(prSecs)}</div>
-      </div>
+      <div class="pg-nameline">Nome: ___________________________ &nbsp;&nbsp; Turma: _____________ &nbsp;&nbsp; Data: ${today}</div>
+      ${renderOf(ofSecs)}
+      ${ofSecs.length===0?'':'<div style="margin-top:8px;font-size:8px;color:#aaa;text-align:center">⚽ Álbum Panini Copa do Mundo 2026™</div>'}
     </div>
-    <div class="pg-foot">Álbum Panini FIFA Copa do Mundo 2026™ — Impresso em ${today} · Marque □ ao fazer a troca ou □ ao receber</div>
+
+    <!-- ══ PÁGINA 2 — PRECISO ══ -->
+    <div class="pg-section">
+      <div class="pg-pglbl">— Página 2 de 2 —</div>
+      <div class="pg-shdr" style="background:#fee2e2;color:#991b1b">
+        🔴 PRECISO<span style="font-size:10px;font-weight:600">${totalPr} figurinha${totalPr!==1?'s':''} · marque □ quando receber</span>
+      </div>
+      <div class="pg-nameline">Nome: ___________________________ &nbsp;&nbsp; Turma: _____________ &nbsp;&nbsp; Data: ${today}</div>
+      ${renderPr(prSecs)}
+      ${prSecs.length===0?'':'<div style="margin-top:8px;font-size:8px;color:#aaa;text-align:center">⚽ Álbum Panini Copa do Mundo 2026™</div>'}
+    </div>
+
   </div>`;
 }
 
