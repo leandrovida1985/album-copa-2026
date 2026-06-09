@@ -175,15 +175,16 @@ main{max-width:960px;margin:0 auto;padding:16px 13px}
 .pg-pr-grid{column-count:3;column-gap:10px}
 .pg-pr-block{break-inside:avoid;margin-bottom:5px}
 .pg-pr-ghdr{font-size:8px;font-weight:800;color:#444;background:#f0f0f0;padding:1px 5px;border-radius:2px;margin-bottom:2px;border-left:2px solid #aaa}
-.pg-pr-nation{display:flex;flex-wrap:wrap;align-items:center;gap:2px;margin-bottom:2px}
-.pg-pr-lbl{font-size:8px;font-weight:800;color:#222;min-width:30px;flex-shrink:0}
+.pg-pr-nation{display:flex;align-items:flex-start;gap:3px;margin-bottom:3px}
+.pg-pr-lbl{font-size:8px;font-weight:800;color:#222;min-width:30px;flex-shrink:0;padding-top:1px}
+.pg-num-grid{display:flex;flex-wrap:wrap;gap:2px}
 .pg-gnum{border:1px solid #bbb;border-radius:2px;padding:0 2px;font-size:8px;min-width:16px;text-align:center;font-weight:700;color:#111;display:inline-block;line-height:14px}
 .pg-empty{font-size:11px;color:#888;text-align:center;padding:14px}
 .pg-foot{text-align:center;font-size:8px;color:#bbb;margin-top:8px;padding-top:6px;border-top:1px solid #eee}
 @media print{
-  @page{size:A4 portrait;margin:8mm}
+  @page{size:A4 landscape;margin:6mm}
   header,nav,#pwScreen,#loadingOverlay,.pg-topbar{display:none!important}
-  body{background:#fff!important;margin:0;padding:0;font-size:9pt}
+  body{background:#fff!important;margin:0;padding:0}
   main{max-width:100%!important;padding:0!important}
   .pg-preview{border:none!important;padding:0!important;border-radius:0!important}
   .sec{display:none!important}
@@ -192,9 +193,25 @@ main{max-width:960px;margin:0 auto;padding:16px 13px}
   .pg-section:last-child{page-break-after:auto}
   .pg-section+.pg-section{border-top:none;padding-top:0}
   .pg-pglbl{display:none}
-  .pg-of-grid{column-count:4}
-  .pg-pr-grid{column-count:3}
   .pg-foot{display:none}
+  .pg-shdr{font-size:9px;padding:3px 8px;margin-bottom:3px}
+  .pg-nameline{font-size:7px;margin-bottom:3px;padding-bottom:2px}
+  /* TENHO — 5 colunas, sem break-inside */
+  .pg-of-grid{column-count:6;column-gap:5px}
+  .pg-of-grp{break-inside:auto;margin-bottom:2px}
+  .pg-of-ghdr{font-size:6px;padding:0 3px;margin-bottom:1px}
+  .pg-of-item{padding:0}
+  .pg-ck{font-size:8px}
+  .pg-glbl{font-size:7px}
+  .pg-gcnt{font-size:6px;padding:0 2px}
+  /* PRECISO — números em grade 5×col, colunas dinâmicas via JS */
+  .pg-pr-grid{column-count:5;column-gap:6px}
+  .pg-pr-block{break-inside:auto;margin-bottom:5px}
+  .pg-pr-ghdr{font-size:7px;padding:1px 4px;margin-bottom:2px;break-after:avoid}
+  .pg-pr-nation{gap:3px;margin-bottom:3px;align-items:flex-start;flex-wrap:nowrap}
+  .pg-pr-lbl{font-size:7px;min-width:22px}
+  .pg-num-grid{display:grid;grid-template-columns:repeat(5,auto);gap:2px}
+  .pg-gnum{font-size:7px;min-width:13px;line-height:11px;padding:0 1px;border-width:0.5px;border-radius:1px}
 }
 /* Loading overlay */
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
@@ -767,7 +784,7 @@ function rPR(){
       if(s.nations){
         return`<div class="pg-pr-block">
           <div class="pg-pr-ghdr" style="border-left-color:${s.color}">${s.label}</div>
-          ${s.nations.map(n=>`<div class="pg-pr-nation"><span class="pg-pr-lbl">${n.flag} ${n.abbr}</span>${n.nums.map(num=>`<span class="pg-gnum">${num}</span>`).join('')}</div>`).join('')}
+          ${s.nations.map(n=>`<div class="pg-pr-nation"><span class="pg-pr-lbl">${n.flag} ${n.abbr}</span><div class="pg-num-grid">${n.nums.map(num=>`<span class="pg-gnum">${num}</span>`).join('')}</div></div>`).join('')}
         </div>`;
       }
       if(s.stads){
@@ -791,7 +808,23 @@ function rPR(){
     return a+(s.nums?.length||0);
   },0);
 
+  // Colunas de impressão calculadas pelo conteúdo real (~65px por linha, A4 landscape)
+  const ofLines=ofSecs.reduce((a,s)=>a+1+(s.items?.length||0),0);
+  // PRECISO: estima altura real em px c/ margem de segurança de 20%
+  // header=17px, linha de nums=17px, margem nação=3px, margem bloco=6px
+  const prEstH=prSecs.reduce((a,s)=>{
+    if(s.nations){const r=s.nations.reduce((b,n)=>b+Math.ceil(n.nums.length/5),0);return a+17+r*17+s.nations.length*3+6;}
+    return a+40; // FWC/CC: header+nums+margem
+  },0);
+  // 673px = 90% de 748px (A4 landscape) — garante que nunca estoura para pág 3
+  const ofCols=Math.max(2,Math.min(5,Math.ceil(ofLines/52)));
+  const prCols=Math.max(2,Math.min(5,Math.ceil(prEstH/673)));
+
   document.getElementById('tab-print').innerHTML=`
+  <style id="pgDynStyle">@media print{
+    .pg-of-grid{column-count:${ofCols}!important}
+    .pg-pr-grid{column-count:${prCols}!important}
+  }</style>
   <div class="pg-topbar">
     <div>
       <div style="font-size:14px;font-weight:700;color:var(--text)">🖨️ Lista de Trocas — A4</div>
